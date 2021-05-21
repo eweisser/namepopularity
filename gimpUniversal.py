@@ -145,13 +145,13 @@ def processDataUpToRSPD(year,sex):          # RSPD stands for residual standard 
         byNameDictio[firstName]['mean'] = mean
         byNameDictio[firstName]['pStDev'] = pStDev
 
-    #Great, we've included the mean and the standard deviation (p-type). Now we need to create a dictionary for residuals.
+    # Great, we've included the mean and the standard deviation (p-type). Now we need to create a dictionary for residuals.
     residualsDictio = byNameDictio.copy()   # The .copy() method makes an independent copy--they're not linked
     for firstName in residualsDictio.keys():
         for state in residualsDictio[firstName].keys():
             residualsDictio[firstName][state] = byNameDictio[firstName][state] - byNameDictio[firstName]['mean']
 
-    #And now we have a dictionary full of residuals, fantastic! Now we need a dictionary for "what percentage of a standard deviation each residual is".
+    # And now we have a dictionary full of residuals, fantastic! Now we need a dictionary for "what percentage of a standard deviation each residual is".
 
     resStDevPercDictio = byNameDictio.copy()
     for firstName in resStDevPercDictio.keys():
@@ -161,7 +161,7 @@ def processDataUpToRSPD(year,sex):          # RSPD stands for residual standard 
         resStDevPercDictio[firstName].pop('mean')
         resStDevPercDictio[firstName].pop('pStDev')
 
-    #for key in resStDevPercDictio.keys():
+    # for key in resStDevPercDictio.keys():
         #print(key)
 
     return resStDevPercDictio
@@ -183,7 +183,7 @@ resStDevPercDictio = processDataUpToRSPD(userYear,userMF)
 
 while True:
 
-    print('Choose an operation.\nTo see an individual state\'s report on names in a given year, enter a command like "state PA".\nTo output code that can be used in GIMP to make a map representing relative popularity for a specific name, just type the name itself.\nTo output maps like that for all of the top 100 names in the active year, type "top100".\nTo compare states as a whole (within a single year), enter "compare states".\nTo make code for a map showing states\' similarity to a specified state, enter "compare states to [PA]".\nTo see what names are similar to a specific name, enter "compare names to [Jessica]".')
+    print('Choose an operation.\nTo see an individual state\'s report on names in a given year, enter a command like "state PA".\nTo output code that can be used in GIMP to make a map representing relative popularity for a specific name, just type the name itself.\nTo output code for maps like that for all of the top 100 names in the active year, type "top100".\nTo compare states as a whole (within a single year), enter "compare states".\nTo make code for a map showing states\' similarity to a specified state, enter "compare states to [PA]".\nTo see what names are similar to a specific name, enter "compare names to [Jessica]".')
     userInput = input('>>> ')
 
 
@@ -191,6 +191,8 @@ while True:
         break
 
     ################# NAMES' PROMINENCE FOR ONE STATE, DATA PRINTOUT ###############################
+
+    # [operation 1]
 
     elif userInput.startswith('state '):
         residualsPercForOneState = {}
@@ -204,6 +206,8 @@ while True:
             print(item, residualsPercForOneState[item])
 
     ################# COMPARE ALL STATES DATA PRINTOUT TO FILE ###############################
+
+    # [operation 4]
 
     elif userInput.startswith('compare states'):    # compare all states to each other
 
@@ -250,10 +254,12 @@ while True:
 
     ################# COMPARING STATES TO ONE STATE: MAP GIMP CODE ###############################
 
+    # [operation 5]
+
     elif userInput.startswith('compare states to'):     # compare all states to one state
         focalState = userInput.replace('compare states to ','')
 
-        fileToWrite = open("gimpCode/gimpCodeExperimental"+userYear+userMF+focalState+".txt", "w")
+        fileToWrite = open("gimpCode/gimpCodeExperimental"+userYear+userMF+"_"+focalState+".txt", "w")
 
         for firstName in sortedLimitedNames:    # for every name in the top 100, sorted by rank...
             similsForOneName.clear()            # clear this dictionary
@@ -320,11 +326,14 @@ while True:
 
     ################# TOP 100 NAMES, MAKING MAPS GIMP CODE ###############################
 
+    # [operation 3]
+
     elif userInput.startswith('top100'):        # makes GIMP code for 100 maps, one for each of the top 100 names that year:
         #print(nameList)
         fileToWrite = open("gimpCode/gimpCode"+userYear+userMF+".txt", "w")
+
+        # Loop through each of the top 100 names.
         for top100Name in sortedLimitedNames:
-            #print(top100Name)
             red4.clear()
             red3.clear()
             red2.clear()
@@ -335,6 +344,8 @@ while True:
             blue3.clear()
             blue4.clear()
             grayNED.clear()
+
+            # Loop through each state that appears as a key in the current name's entry in the RSPD
             for state in resStDevPercDictio[top100Name].keys():
                 if resStDevPercDictio[top100Name][state] > 1.75:
                     red4.append(state)
@@ -358,6 +369,7 @@ while True:
                 if state not in resStDevPercDictio[top100Name].keys():
                     grayNED.append(state)
 
+            # Start writing the GIMP Python-fu code to the file.
             fileToWrite.write('img = gimp.image_list()[0]\n')
             fileToWrite.write('orig = pdb.gimp_image_get_layer_by_name(img,\'blank\')\n')
             fileToWrite.write('map = pdb.gimp_layer_copy(orig,FALSE)\n')
@@ -395,7 +407,9 @@ while True:
 
     ################# COMPARE A NAME TO OTHER NAMES, DATA PRINTOUT ###############################
 
-    elif userInput.startswith('compare names to'):        # :
+    # [operation 6]
+
+    elif userInput.startswith('compare names to'):
         focalName = userInput.replace('compare names to ','')
         while focalName not in resStDevPercDictio.keys():
             print("Oh dear, that name isn't in our name dictionary. You'll have to try again.")
@@ -450,9 +464,9 @@ while True:
 
 
 
-    ############# A SINGLE NAME MAP --GIMP CODE ############################################
+    ############# A SINGLE NAME MAP -- GIMP CODE ############################################
 
-    else:       # original script--for analysis of a single name:
+    else:       # [operation 2] original script--for analysis of a single name:
 
         # If the user has already done this since starting the program, these groupings will be populated. We need to start with blank slates.
         red4.clear()
@@ -530,21 +544,21 @@ while True:
         fileToWrite.write('pdb.gimp_context_set_foreground((255,219,219))\n')         #sets the color to red+1
         for state in red1:
             fileToWrite.write(printingDictio[state])
-#        fileToWrite.write('pdb.gimp_context_set_foreground((230,230,255))\n')         #sets the color to blue+1
-#        for state in blue1:
-#            fileToWrite.write(printingDictio[state])
-#        fileToWrite.write('pdb.gimp_context_set_foreground((182,182,255))\n')         #sets the color to blue+2
-#        for state in blue2:
-#            fileToWrite.write(printingDictio[state])
-#        fileToWrite.write('pdb.gimp_context_set_foreground((113,113,255))\n')         #sets the color to blue+3
-#        for state in blue3:
-#            fileToWrite.write(printingDictio[state])
-#        fileToWrite.write('pdb.gimp_context_set_foreground((0,0,255))\n')         #sets the color to blue+4
-#        for state in blue4:
-#            fileToWrite.write(printingDictio[state])
-#        fileToWrite.write('pdb.gimp_context_set_foreground((204,204,204))\n')         #sets the color to gray-NED
-#        for state in grayNED:
-#            fileToWrite.write(printingDictio[state])
+        fileToWrite.write('pdb.gimp_context_set_foreground((230,230,255))\n')         #sets the color to blue+1
+        for state in blue1:
+            fileToWrite.write(printingDictio[state])
+        fileToWrite.write('pdb.gimp_context_set_foreground((182,182,255))\n')         #sets the color to blue+2
+        for state in blue2:
+            fileToWrite.write(printingDictio[state])
+        fileToWrite.write('pdb.gimp_context_set_foreground((113,113,255))\n')         #sets the color to blue+3
+        for state in blue3:
+            fileToWrite.write(printingDictio[state])
+        fileToWrite.write('pdb.gimp_context_set_foreground((0,0,255))\n')         #sets the color to blue+4
+        for state in blue4:
+            fileToWrite.write(printingDictio[state])
+        fileToWrite.write('pdb.gimp_context_set_foreground((204,204,204))\n')         #sets the color to gray-NED
+        for state in grayNED:
+            fileToWrite.write(printingDictio[state])
 
 try:
     fileToWrite.close()
