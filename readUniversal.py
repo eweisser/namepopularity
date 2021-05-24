@@ -46,31 +46,56 @@ MCount = 0
 FCount = 0
 rowCount = 0
 stateList = []
+columnForStateCode = -1
+columnForSexCode = -1
 
 userChosenYear = input('Choose a year to count. If you just want to read the first few lines, type \' sample\' after the year itself. ')
-columnForStateCode = int(input('What index number has the state codes? A good guess is 20. '))
-columnForSexCode = int(input('What index number has the sex data? A good guess is 86. '))
-print("Results will be output to \"count" + userChosenYear + ".txt\"")
-
+if userChosenYear.endswith('sample'):
+    pass
+else:
+    # columnForStateCode = int(input('What index number has the state codes? A good guess is 20. '))
+    # columnForSexCode = int(input('What index number has the sex data? A good guess is 86. '))
+    print("Results will be output to \"count" + userChosenYear + ".txt\"")
 
 
 
 with open("bigCSVs\\natl" + userChosenYear[0:4] + ".csv") as csv_file:
     reader = csv.reader(csv_file, delimiter=",")
-    for row in reader:      # for every row in the CSV file...
+
+    for row in reader:
         rowCount = rowCount + 1
-        if userChosenYear.endswith('sample'):
-            for i in range(len(row)):
-                print(i,row[i])
-            userReadyToContinue = input('Are you ready to read the next line? ')
-        else:
-            currentValues = counterDictionary.get(row[columnForStateCode],[0,0,0])      # row[20] for year 1999
+        if rowCount > 3:
+            break
+        for i in range(len(row)):
+            if row[i] == "stateres":
+                columnForStateCode = i
+            if row[i] == "csex":
+                columnForSexCode = i
+            if columnForStateCode > -1 and columnForSexCode > -1:
+                break
+
+    rowCount = 0
+
+    for row in reader:      # for every row in the CSV file...
+        rowCount = rowCount + 1                 # add 1 to the rowCount
+
+        if userChosenYear.endswith('sample'):   # if the user asked for a 'sample'...
+            for i in range(len(row)):           # for every index number in the array made from the row...
+                print(i,row[i])                     # print the index number and the contents of row at that index
+            userReadyToContinue = input('Press ENTER when you are ready to read the next line. ')
+
+        else:               # if the user did not ask for a sample...
+            currentValues = counterDictionary.get(row[columnForStateCode],[0,0,0])      # reminder how .get() works for Python dictionaries: the first parameter is a key in counterDictionary. If the key is found, return the value. If the key isn't found, return the second parameter. Here, the keys are the codes for states as found in STATERES. If the state/key for this row has appeared before, get its current counts. If this is the first time this state/key has been found, return [0,0,0].
             currentValues[0] = currentValues[0]+1
-            if row[columnForSexCode] == '1':                # row[86] for year 1999
+            if row[columnForSexCode] == '1':
                 currentValues[1] = currentValues[1]+1
             if row[columnForSexCode] == '2':
                 currentValues[2] = currentValues[2]+1
-            counterDictionary[row[columnForStateCode]] = currentValues
+            counterDictionary[row[columnForStateCode]] = currentValues          # set the value for the key (state) found for this row to be the currentValues array (create the key/value pair if it doesn't exist)
+            # print(row[columnForStateCode])
+            # print(currentValues)
+            # input()
+    print(counterDictionary)
 
 stateList = ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
 codeToPrintFemaleCount = "{'"
@@ -80,10 +105,11 @@ codeToPrintCombinedCount = "{'"
 # first the girls:
 for x in range(51):
     try:
-        if x <= 8:
+        if x <= 8:      # this is necessary because the states with STATERES code numbers less than 10 are coded with a leading zero.
             codeToPrintFemaleCount = codeToPrintFemaleCount + stateList[x] + "':" + str(counterDictionary["0"+str(x+1)][2]) + ",'"
         else:
             codeToPrintFemaleCount = codeToPrintFemaleCount + stateList[x] + "':" + str(counterDictionary[str(x+1)][2]) + ",'"
+        # We're going through each number from 0 to 50. We add 1, getting 1 to 51. For 1 to 9 (originally 0 to 8), we add a leading zero. So now we have 01 to 51. We treat this as a key in counterDictionary and get the value for this key. It's an array. We get the value at index 2 of the array (index 2 is the female total). Convert this number to a string. The key 'stateres' is never retrieved.
     except:
         print("Tried to print when x = " + str(x))
         #pass
@@ -94,7 +120,7 @@ codeToPrintFemaleCount = codeToPrintFemaleCount + "}"
 # now for the boys:
 for x in range(51):
     try:
-        if x <= 8:
+        if x <= 8:      # this is necessary because the states with STATERES code numbers less than 10 are coded with a leading zero.
             codeToPrintMaleCount = codeToPrintMaleCount + stateList[x] + "':" + str(counterDictionary["0"+str(x+1)][1]) + ",'"
         else:
             codeToPrintMaleCount = codeToPrintMaleCount + stateList[x] + "':" + str(counterDictionary[str(x+1)][1]) + ",'"
@@ -108,7 +134,7 @@ codeToPrintMaleCount = codeToPrintMaleCount + "}"
 # now combined:
 for x in range(51):
     try:
-        if x <= 8:
+        if x <= 8:      # this is necessary because the states with STATERES code numbers less than 10 are coded with a leading zero.
             codeToPrintCombinedCount = codeToPrintCombinedCount + stateList[x] + "':" + str(counterDictionary["0"+str(x+1)][0]) + ",'"
         else:
             codeToPrintCombinedCount = codeToPrintCombinedCount + stateList[x] + "':" + str(counterDictionary[str(x+1)][0]) + ",'"
@@ -119,7 +145,10 @@ for x in range(51):
 codeToPrintCombinedCount = codeToPrintCombinedCount.rstrip(",'")
 codeToPrintCombinedCount = codeToPrintCombinedCount + "}"
 
-fileToPrintTo = open("count"+userChosenYear+".txt", "w")
-fileToPrintTo.write("FEMALE\n"+codeToPrintFemaleCount+"\nMALE\n"+codeToPrintMaleCount+"\nTOTAL\n"+codeToPrintCombinedCount)
+wantToOutput = input('If you want to output the counts to a text file, enter \'y\' or \'yes\': ')
+
+if wantToOutput == 'y' or wantToOutput == 'yes':
+    fileToPrintTo = open("count"+userChosenYear+".txt", "w")
+    fileToPrintTo.write("FEMALE\n"+codeToPrintFemaleCount+"\nMALE\n"+codeToPrintMaleCount+"\nTOTAL\n"+codeToPrintCombinedCount)
 
 #currentFolder.close()
