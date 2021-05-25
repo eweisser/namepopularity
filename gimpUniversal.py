@@ -90,6 +90,7 @@ def processDataUpToRSPD(year,sex):          # RSPD stands for residual standard 
     byNameDictio.clear()
     global sortedNames
     global sortedLimitedNames
+    global allBirthsDictio
 
 
     yearBirthTotalsFile = open("countAll.txt", "r")
@@ -100,7 +101,6 @@ def processDataUpToRSPD(year,sex):          # RSPD stands for residual standard 
             allBirthsDictio = ast.literal_eval(line[line.find("{"):])
 
     yearBirthTotalsFile.close()
-    #print(allBirthsDictio)
 
     for entry in currentFolder:             # first, we need to make the list of names
         if entry.name.endswith('.TXT'):     # consider only the .txt files
@@ -504,8 +504,11 @@ while True:
                 blue3.append(state)
             elif resStDevPercDictio[userInput][state] < -1.75:
                 blue4.append(state)
+        # print(allBirthsDictio)
+        # input()
         # Loop through all states. If a state is not found among the keys for this name for this year, add it to the gray color group.
         for state in allBirthsDictio.keys():
+            # print(allBirthsDictio)
             if state not in resStDevPercDictio[userInput].keys():
                 grayNED.append(state)
 

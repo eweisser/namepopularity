@@ -13,8 +13,8 @@ allData = []    # this will hold all the data--except we'll restrict it the rele
 nameList = []   # this will hold all the relevant first names, each only ONCE
 sortedNames = []   # this will hold all the relevant first names, each only ONCE, in order of declining frequency
 sortedLimitedNames = []   # this will hold all the top 100 most frequent first names, sorted, each only ONCE
-allBirthsDictio = {}    
-smallDictio = {}    
+allBirthsDictio = {}
+smallDictio = {}
 byNameDictio = {}
 residualsDictio = {}
 resStDevPercDictio = {}
@@ -48,11 +48,11 @@ nameComparisonDictio = {}         # this is for testing which names are similar
 
 
 def processDataUpToRSPD(year,sex):
-    
+
     print("Analyzing raw numbers for " + sex + " in " + year + "...")
-    
+
     currentFolder = os.scandir()
-    
+
     simpleCount.clear()
     allData.clear()
     nameList.clear()
@@ -60,8 +60,8 @@ def processDataUpToRSPD(year,sex):
     byNameDictio.clear()
     global sortedNames
     global sortedLimitedNames
-    
-    
+
+
     yearBirthTotalsFile = open("countAll.txt", "r")
     for line in yearBirthTotalsFile:
         #print(line)
@@ -71,7 +71,7 @@ def processDataUpToRSPD(year,sex):
 
     yearBirthTotalsFile.close()
     #print(allBirthsDictio)
-    
+
     for entry in currentFolder:             # first, we need to make the list of names
         if entry.name.endswith('.TXT'):     # consider only the .txt files
             with open(entry.name) as csv_file:      # let's open that .txt file as a CSV file
@@ -124,19 +124,19 @@ def processDataUpToRSPD(year,sex):
     #And now we have a dictionary full of residuals, fantastic! Now we need a dictionary for "what percentage of a standard deviation each residual is".
 
     resStDevPercDictio = byNameDictio.copy()
-    for firstName in resStDevPercDictio.keys():       
+    for firstName in resStDevPercDictio.keys():
         for state in resStDevPercDictio[firstName].keys():
             if byNameDictio[firstName]['pStDev'] != 0:
                 resStDevPercDictio[firstName][state] = residualsDictio[firstName][state] / byNameDictio[firstName]['pStDev']
         resStDevPercDictio[firstName].pop('mean')
         resStDevPercDictio[firstName].pop('pStDev')
-    
+
     #for key in resStDevPercDictio.keys():
         #print(key)
-    
+
     return resStDevPercDictio
 
-    
+
 ############### END FUNCTION DEFINITION ####################
 ############################################################
 ############################################################
@@ -174,8 +174,8 @@ def writeCodeForOneYear(year):
             blue4.append(state)
     for state in all50States:
         if state not in resStDevPercDictio[nameToMap].keys():
-            grayNED.append(state)            
-            
+            grayNED.append(state)
+
     print()
     print("1.75+ SDs from mean: ", red4)
     print("1.25 to 1.75 SDs from mean: ", red3)
@@ -225,17 +225,17 @@ def writeCodeForOneYear(year):
     fileToWrite.write('pdb.gimp_context_set_foreground((204,204,204))\n')         #sets the color to gray-NED
     for state in grayNED:
         fileToWrite.write(printingDictio[state])
-    
-    
-    
-    
+
+
+
+
 
 nameToMap = input('Choose a name: ')
 userMF = input('Choose male or female (M/F): ')
 fileToWrite = open("gimpCode/Diachronic/gimpCodeExperimental"+nameToMap+userMF+".txt", "w")
 
 #yearRange = range(1931,2020)
-yearRange = range(2001,2006)
+yearRange = range(1990,2018)        # the range generated will end with the year BEFORE the second number specified
 for year in yearRange:
     year = str(year)
     #print("The year is ", year)
@@ -246,10 +246,10 @@ for year in yearRange:
     except:
         print("Something went wrong with the year " + year)
 
-        
-        
-        
-        
+
+
+
+
 
 try:
     fileToWrite.close()
