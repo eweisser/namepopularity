@@ -183,8 +183,14 @@ resStDevPercDictio = processDataUpToRSPD(userYear,userMF)
 
 while True:
 
-    print('Choose an operation.\nTo see an individual state\'s report on names in a given year, enter a command like "state PA".\nTo output code that can be used in GIMP to make a map representing relative popularity for a specific name, just type the name itself.\nTo output code for maps like that for all of the top 100 names in the active year, type "top100".\nTo compare states as a whole (within a single year), enter "compare states".\nTo make code for a map showing states\' similarity to a specified state, enter "compare states to [PA]".\nTo see what names are similar to a specific name, enter "compare names to [Jessica]".')
+    print('Choose an operation.\nTo see an individual state\'s report on names in a given year, enter a command like "state PA".\n \
+    To output code that can be used in GIMP to make a map representing relative popularity for a specific name, just type the name itself.\n \
+    To output maps like that for all of the top 100 names in the active year, type "top100".\n \
+    To compare states as a whole (within a single year), enter "compare states".\n \
+    To make code for a map showing states\' similarity to a specified state, enter "compare states to [PA]".\n \
+    To see what names are similar to a specific name, enter "compare names to [Jessica]".')
     userInput = input('>>> ')
+    print()
 
 
     if len(userInput) < 1 or userInput == "x" or userInput == "q" or userInput == "exit":
