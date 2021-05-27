@@ -137,7 +137,7 @@ def processDataUpToRSPD(year,sex):
     return resStDevPercDictio
 
 
-############### END FUNCTION DEFINITION ####################
+############### END FUNCTION: processDataUpToRSPD DEFINITION ####################
 ############################################################
 ############################################################
 
@@ -227,24 +227,48 @@ def writeCodeForOneYear(year):
         fileToWrite.write(printingDictio[state])
 
 
+############### END FUNCTION: writeCodeForOneYear DEFINITION ####################
+############################################################
+############################################################
+
+
 
 
 
 nameToMap = input('Choose a name: ')
 userMF = input('Choose male or female (M/F): ')
+print()
+plainOrRollingAverageSelection = input('Would you like to generate 1) independent maps for each year, or 2) maps using a 5-year rolling mean? ')
 fileToWrite = open("gimpCode/Diachronic/gimpCodeExperimental"+nameToMap+userMF+".txt", "w")
+oneNameDictio = {}
 
 #yearRange = range(1931,2020)
-yearRange = range(1990,2018)        # the range generated will end with the year BEFORE the second number specified
+startingYear = 1990
+yearAfterEndingYear = 2018      # reset to 2018
+yearRange = range(startingYear,yearAfterEndingYear)        # the range generated will end with the year BEFORE the second number specified
 for year in yearRange:
     year = str(year)
-    #print("The year is ", year)
     try:
+        resStDevPercDictio.clear()
         resStDevPercDictio = processDataUpToRSPD(year,userMF)
+        oneNameDictio[year] = resStDevPercDictio[nameToMap]
+
         print(year + " processed.")
-        writeCodeForOneYear(year)
+
+        if plainOrRollingAverageSelection == 1:
+            writeCodeForOneYear(year)
+
+        else:
+            # currentYearOf5Year = int(year)
+            print("For the 5 five year rolling average, we'll need:")
+            for currentYearOf5Year in range(int(year),int(year)-5,-1):
+                if currentYearOf5Year >= startingYear:
+                    print(currentYearOf5Year)
+
     except:
         print("Something went wrong with the year " + year)
+#print(oneNameDictio)
+input()
 
 
 
