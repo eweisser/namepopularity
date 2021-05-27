@@ -95,12 +95,35 @@ with open("bigCSVs\\natl" + userChosenYear[0:4] + ".csv") as csv_file:
             # print(row[columnForStateCode])
             # print(currentValues)
             # input()
-    print(counterDictionary)
+    #print(counterDictionary)
 
 stateList = ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
 codeToPrintFemaleCount = "{'"
 codeToPrintMaleCount = "{'"
 codeToPrintCombinedCount = "{'"
+
+
+# In this section, we'll double-check that the male plus female numbers equal the total for each state.
+for stateNumber in counterDictionary:
+        counts = counterDictionary[stateNumber]
+        if counts[0] == (counts[1]+counts[2]):
+            pass
+            # print(counts[0],"is the same as",counts[1] + counts[2])
+        else:
+            print("CALCULATION WARNING:")
+            print("For state with ID",stateNumber,"totals do not match")
+            print("Total births counted:",counts[0])
+            print("Male births counted:",counts[1])
+            print("Female births counted:",counts[2])
+            input()
+
+
+
+
+
+
+
+# PREPARING THE STRINGS TO WRITE TO THE FILE
 
 # first the girls:
 for x in range(51):
