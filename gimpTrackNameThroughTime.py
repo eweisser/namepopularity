@@ -6,6 +6,29 @@ import ast
 
 # ! Notes for 2TrackNameThroughTime:
 # This script is ONLY for creating series of maps in GIMP where each file shows only one name, and each layer is a different year.
+# Program flow: The user is prompted to choose a name and specify its gender; then, to choose whether to calculate a 5-year rolling average or not.
+# The filename to write to is defined, based on the user's input.
+# An initial year and final year are specified in the code, based on the availability of data.
+# The program loops through each year from the initial to the final. In this loop:
+
+    # 1. The "processDataUpToRSPD" function is called. It's passed the year that the loop is currently on, and the gender the user specified. It returns a dictionary called "resStDevPercDictio"*.
+
+    # 2. One entry is made in the "oneNameDictio" dictionary. The key is the year the loop is currently on; its value is the dictionary that is the value of the name-key in "resStDevPercDictio"*.
+
+    # 3. If the user has chosen not to calculate the rolling average...
+        # The "writeCodeForOneYear" function is called. It's passed the year that the loop is currently on. It returns nothing. It prints the groupings of states by popularity of the user-chosen name for that year. It also writes GIMP Python-fu code for coloring a map based on that information to the specified file.
+
+    # 3. If the user wants the rolling average...
+        # The "writeCodeForOneYear" function is called.
+
+# After each year has been looped through, the relevant files and folders are closed and the program ends.
+
+# * A new resStDevPercDictio is generated for each year. The old dictionary is cleared before a new one is generated. resStDevPercDictio is a dictionary of dictionaries. The top-level keys are names. The values for these name-keys are dictionaries. The keys in these dictionaries--thus lower-level keys--are state abbreviations like 'KY'. The values for these state-keys are doubles; they are the percentages of a standard deviation of name frequency. So, the structure is like:
+    # {'Jessica': {'AK': -1.2, 'CO': 0.3, 'HI': 0.7}, 'Ashley': {'AK': 0.6, 'CO': -0.1, 'HI': 1.9}  }
+
+# * So, the oneNameDictio is added to each year. Its structure is like:
+    # {'1990': {'AK': -1.2, 'CO': 0.3, 'HI': 0.7}, '1991': {'AK': 0.6, 'CO': -0.1, 'HI': 1.9}  }
+
 
 
 all50States = ['AK','AL','AR','AZ','CA','CO','CT','DE','FL','GA','HI','IA','ID','IL','IN','KS','KY','LA','MA','MD','ME','MI','MN','MO','MS','MT','NC','ND','NE','NH','NJ','NM','NV','NY','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VA','VT','WA','WI','WV','WY']
@@ -137,11 +160,11 @@ def processDataUpToRSPD(year,sex):
     return resStDevPercDictio
 
 
-############### END FUNCTION DEFINITION ####################
+############### END FUNCTION: processDataUpToRSPD DEFINITION ####################
 ############################################################
 ############################################################
 
-def writeCodeForOneYear(year):
+def writeCodeForOneYear(year,dataDictionary):
 
     red4.clear()
     red3.clear()
@@ -153,28 +176,49 @@ def writeCodeForOneYear(year):
     blue3.clear()
     blue4.clear()
     grayNED.clear()
-    for state in resStDevPercDictio[nameToMap].keys():
-        if resStDevPercDictio[nameToMap][state] > 1.75:
+
+    # if plainOrRollingAverageSelection == "1":
+    #     whatToLoopThrough = resStDevPercDictio[nameToMap].keys()    # It's an array of state abbreviation strings: ['AK','AL','AR', etc...]
+    #     stateHolder = resStDevPercDictio[nameToMap]     # It's a dictionary with state abbreviation string keys and RSP double values: {'AK': 2.1, 'AL': -0.1, 'AZ': 0.2}
+    #     # print(whatToLoopThrough)
+    #     # input()
+    # elif plainOrRollingAverageSelection == "2":
+    #     whatToLoopThrough = resStDevPercDictio[nameToMap].keys() # No
+    #     stateHolder = resStDevPercDictio[nameToMap] # No
+    # else:
+    #     print("Uh-oh, the user entered a bad choice and we didn't validate it.")
+    #     input()
+
+    whatToLoopThrough = dataDictionary.keys()
+
+    # print("Checkpoint 1")
+    # input()
+
+    for state in whatToLoopThrough:
+        if dataDictionary[state] > 1.75:
             red4.append(state)
-        elif resStDevPercDictio[nameToMap][state] > 1.25:
+        elif dataDictionary[state] > 1.25:
             red3.append(state)
-        elif resStDevPercDictio[nameToMap][state] > 0.75:
+        elif dataDictionary[state] > 0.75:
             red2.append(state)
-        elif resStDevPercDictio[nameToMap][state] > 0.25:
+        elif dataDictionary[state] > 0.25:
             red1.append(state)
-        elif resStDevPercDictio[nameToMap][state] > -0.25:
+        elif dataDictionary[state] > -0.25:
             neutral.append(state)
-        elif resStDevPercDictio[nameToMap][state] > -0.75:
+        elif dataDictionary[state] > -0.75:
             blue1.append(state)
-        elif resStDevPercDictio[nameToMap][state] > -1.25:
+        elif dataDictionary[state] > -1.25:
             blue2.append(state)
-        elif resStDevPercDictio[nameToMap][state] > -1.75:
+        elif dataDictionary[state] > -1.75:
             blue3.append(state)
-        elif resStDevPercDictio[nameToMap][state] < -1.75:
+        elif dataDictionary[state] < -1.75:
             blue4.append(state)
     for state in all50States:
-        if state not in resStDevPercDictio[nameToMap].keys():
+        if state not in whatToLoopThrough:
             grayNED.append(state)
+
+    # print("Checkpoint 2")
+    # input()
 
     print()
     print("1.75+ SDs from mean: ", red4)
@@ -227,24 +271,73 @@ def writeCodeForOneYear(year):
         fileToWrite.write(printingDictio[state])
 
 
+############### END FUNCTION: writeCodeForOneYear DEFINITION ####################
+############################################################
+############################################################
+
+
 
 
 
 nameToMap = input('Choose a name: ')
 userMF = input('Choose male or female (M/F): ')
+print()
+plainOrRollingAverageSelection = input('Would you like to generate 1) independent maps for each year, or 2) maps using a 5-year rolling mean? ')
 fileToWrite = open("gimpCode/Diachronic/gimpCodeExperimental"+nameToMap+userMF+".txt", "w")
+oneNameDictio = {}
 
 #yearRange = range(1931,2020)
-yearRange = range(1990,2018)        # the range generated will end with the year BEFORE the second number specified
+startingYear = 1990
+yearAfterEndingYear = 2018      # reset to 2018
+yearRange = range(startingYear,yearAfterEndingYear)        # the range generated will end with the year BEFORE the second number specified
 for year in yearRange:
     year = str(year)
-    #print("The year is ", year)
     try:
+        resStDevPercDictio.clear()
         resStDevPercDictio = processDataUpToRSPD(year,userMF)
+        oneNameDictio[year] = resStDevPercDictio[nameToMap]
+        fiveYearDictio = {}
+        runningAverageDictio = {}
+
         print(year + " processed.")
-        writeCodeForOneYear(year)
+
+        if plainOrRollingAverageSelection == "1":
+            writeCodeForOneYear(year,resStDevPercDictio[nameToMap])
+
+        else:
+            # currentYearOf5Year = int(year)
+            # print("For the 5 five year rolling average, we'll need:")
+            for currentYearOf5Year in range(int(year),int(year)-5,-1):
+                if currentYearOf5Year >= startingYear:
+                    # print("Let's access the year",currentYearOf5Year,"in the oneNameDictio dictionary:")
+                    #print(oneNameDictio[str(currentYearOf5Year)])
+                    fiveYearDictio[str(currentYearOf5Year)] = oneNameDictio[str(currentYearOf5Year)]
+            # print(fiveYearDictio)
+            for state in all50States:
+                stateRSPSum = 0
+                stateAppearances = 0
+                for year in fiveYearDictio.keys():
+                    #print(year,state,fiveYearDictio[year].get(state,100))
+                    # stateRSPSum = stateRSPSum + fiveYearDictio[year].get(state,0)
+                    # if fiveYearDictio[year].get(state,0)
+                    if state in fiveYearDictio[year].keys():
+                        # print(fiveYearDictio[year][state])
+                        stateRSPSum = stateRSPSum + fiveYearDictio[year][state]
+                        stateAppearances = stateAppearances + 1
+                    # else:
+                    #     print(state,"isn't found in",year)
+                if stateAppearances > 0:
+                    # print(state,stateRSPSum/stateAppearances)
+                    runningAverageDictio[state] = stateRSPSum/stateAppearances
+            # print(runningAverageDictio)     # now we've made a dictionary like this: {'AK':-0.4,'AL':-0.5,'AR':-0.7...}
+            # input()
+            writeCodeForOneYear(year,runningAverageDictio)
+
+
     except:
         print("Something went wrong with the year " + year)
+#print(oneNameDictio)
+input()
 
 
 
