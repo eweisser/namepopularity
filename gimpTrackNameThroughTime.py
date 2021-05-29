@@ -164,7 +164,7 @@ def processDataUpToRSPD(year,sex):
 ############################################################
 ############################################################
 
-def writeCodeForOneYear(year):
+def writeCodeForOneYear(year,dataDictionary):
 
     red4.clear()
     red3.clear()
@@ -177,46 +177,48 @@ def writeCodeForOneYear(year):
     blue4.clear()
     grayNED.clear()
 
-    if plainOrRollingAverageSelection == "1":
-        whatToLoopThrough = resStDevPercDictio[nameToMap].keys()    # It's an array of state abbreviation strings: ['AK','AL','AR', etc...]
-        stateHolder = resStDevPercDictio[nameToMap]     # It's a dictionary with state abbreviation string keys and RSP double values: {'AK': 2.1, 'AL': -0.1, 'AZ': 0.2} 
-        print(stateHolder)
-        input()
-    elif plainOrRollingAverageSelection == "2":
-        whatToLoopThrough = resStDevPercDictio[nameToMap].keys() # No
-        stateHolder = resStDevPercDictio[nameToMap] # No
-    else:
-        print("Uh-oh, the user entered a bad choice and we didn't validate it.")
-        input()
+    # if plainOrRollingAverageSelection == "1":
+    #     whatToLoopThrough = resStDevPercDictio[nameToMap].keys()    # It's an array of state abbreviation strings: ['AK','AL','AR', etc...]
+    #     stateHolder = resStDevPercDictio[nameToMap]     # It's a dictionary with state abbreviation string keys and RSP double values: {'AK': 2.1, 'AL': -0.1, 'AZ': 0.2}
+    #     # print(whatToLoopThrough)
+    #     # input()
+    # elif plainOrRollingAverageSelection == "2":
+    #     whatToLoopThrough = resStDevPercDictio[nameToMap].keys() # No
+    #     stateHolder = resStDevPercDictio[nameToMap] # No
+    # else:
+    #     print("Uh-oh, the user entered a bad choice and we didn't validate it.")
+    #     input()
 
-    print("Checkpoint 1")
-    input()
+    whatToLoopThrough = dataDictionary.keys()
+
+    # print("Checkpoint 1")
+    # input()
 
     for state in whatToLoopThrough:
-        if stateHolder[state] > 1.75:
+        if dataDictionary[state] > 1.75:
             red4.append(state)
-        elif stateHolder[state] > 1.25:
+        elif dataDictionary[state] > 1.25:
             red3.append(state)
-        elif stateHolder[state] > 0.75:
+        elif dataDictionary[state] > 0.75:
             red2.append(state)
-        elif stateHolder[state] > 0.25:
+        elif dataDictionary[state] > 0.25:
             red1.append(state)
-        elif stateHolder[state] > -0.25:
+        elif dataDictionary[state] > -0.25:
             neutral.append(state)
-        elif stateHolder[state] > -0.75:
+        elif dataDictionary[state] > -0.75:
             blue1.append(state)
-        elif stateHolder[state] > -1.25:
+        elif dataDictionary[state] > -1.25:
             blue2.append(state)
-        elif stateHolder[state] > -1.75:
+        elif dataDictionary[state] > -1.75:
             blue3.append(state)
-        elif stateHolder[state] < -1.75:
+        elif dataDictionary[state] < -1.75:
             blue4.append(state)
     for state in all50States:
         if state not in whatToLoopThrough:
             grayNED.append(state)
 
-    print("Checkpoint 2")
-    input()
+    # print("Checkpoint 2")
+    # input()
 
     print()
     print("1.75+ SDs from mean: ", red4)
@@ -294,20 +296,42 @@ for year in yearRange:
         resStDevPercDictio.clear()
         resStDevPercDictio = processDataUpToRSPD(year,userMF)
         oneNameDictio[year] = resStDevPercDictio[nameToMap]
+        fiveYearDictio = {}
+        runningAverageDictio = {}
 
         print(year + " processed.")
 
         if plainOrRollingAverageSelection == "1":
-            writeCodeForOneYear(year)
+            writeCodeForOneYear(year,resStDevPercDictio[nameToMap])
 
         else:
             # currentYearOf5Year = int(year)
-            print("For the 5 five year rolling average, we'll need:")
+            # print("For the 5 five year rolling average, we'll need:")
             for currentYearOf5Year in range(int(year),int(year)-5,-1):
                 if currentYearOf5Year >= startingYear:
-                    print("Let's access the year",currentYearOf5Year,"in the oneNameDictio dictionary:")
-                    print(oneNameDictio[str(currentYearOf5Year)])
-                    input()
+                    # print("Let's access the year",currentYearOf5Year,"in the oneNameDictio dictionary:")
+                    #print(oneNameDictio[str(currentYearOf5Year)])
+                    fiveYearDictio[str(currentYearOf5Year)] = oneNameDictio[str(currentYearOf5Year)]
+            # print(fiveYearDictio)
+            for state in all50States:
+                stateRSPSum = 0
+                stateAppearances = 0
+                for year in fiveYearDictio.keys():
+                    #print(year,state,fiveYearDictio[year].get(state,100))
+                    # stateRSPSum = stateRSPSum + fiveYearDictio[year].get(state,0)
+                    # if fiveYearDictio[year].get(state,0)
+                    if state in fiveYearDictio[year].keys():
+                        # print(fiveYearDictio[year][state])
+                        stateRSPSum = stateRSPSum + fiveYearDictio[year][state]
+                        stateAppearances = stateAppearances + 1
+                    # else:
+                    #     print(state,"isn't found in",year)
+                if stateAppearances > 0:
+                    # print(state,stateRSPSum/stateAppearances)
+                    runningAverageDictio[state] = stateRSPSum/stateAppearances
+            # print(runningAverageDictio)     # now we've made a dictionary like this: {'AK':-0.4,'AL':-0.5,'AR':-0.7...}
+            # input()
+            writeCodeForOneYear(year,runningAverageDictio)
 
 
     except:
