@@ -177,22 +177,7 @@ def writeCodeForOneYear(year,dataDictionary):
     blue4.clear()
     grayNED.clear()
 
-    # if plainOrRollingAverageSelection == "1":
-    #     whatToLoopThrough = resStDevPercDictio[nameToMap].keys()    # It's an array of state abbreviation strings: ['AK','AL','AR', etc...]
-    #     stateHolder = resStDevPercDictio[nameToMap]     # It's a dictionary with state abbreviation string keys and RSP double values: {'AK': 2.1, 'AL': -0.1, 'AZ': 0.2}
-    #     # print(whatToLoopThrough)
-    #     # input()
-    # elif plainOrRollingAverageSelection == "2":
-    #     whatToLoopThrough = resStDevPercDictio[nameToMap].keys() # No
-    #     stateHolder = resStDevPercDictio[nameToMap] # No
-    # else:
-    #     print("Uh-oh, the user entered a bad choice and we didn't validate it.")
-    #     input()
-
     whatToLoopThrough = dataDictionary.keys()
-
-    # print("Checkpoint 1")
-    # input()
 
     for state in whatToLoopThrough:
         if dataDictionary[state] > 1.75:
@@ -217,31 +202,24 @@ def writeCodeForOneYear(year,dataDictionary):
         if state not in whatToLoopThrough:
             grayNED.append(state)
 
-    # print("Checkpoint 2")
-    # input()
-
-    print()
-    print("1.75+ SDs from mean: ", red4)
-    print("1.25 to 1.75 SDs from mean: ", red3)
-    print("0.75 to 1.25 SDs from mean: ", red2)
-    print("0.25 to 0.75 SDs from mean: ", red1)
-    print("-0.25 to 0.25 SDs from mean: ", neutral)
-    print("-0.75 to -0.25 SDs from mean: ", blue1)
-    print("-1.25 to -0.75 SDs from mean: ", blue2)
-    print("-1.75 to -1.25 SDs from mean: ", blue3)
-    print("-1.75- SDs from mean: ", blue4)
-    print("States with no data: ", grayNED)
-    print()
+    # print()
+    # print("1.75+ SDs from mean: ", red4)
+    # print("1.25 to 1.75 SDs from mean: ", red3)
+    # print("0.75 to 1.25 SDs from mean: ", red2)
+    # print("0.25 to 0.75 SDs from mean: ", red1)
+    # print("-0.25 to 0.25 SDs from mean: ", neutral)
+    # print("-0.75 to -0.25 SDs from mean: ", blue1)
+    # print("-1.25 to -0.75 SDs from mean: ", blue2)
+    # print("-1.75 to -1.25 SDs from mean: ", blue3)
+    # print("-1.75- SDs from mean: ", blue4)
+    # print("States with no data: ", grayNED)
+    # print()
     #print("Attempting to write GIMP Python-fu code to .txt file...")
 
-    fileToWrite.write('img = gimp.image_list()[0]\n')
-    fileToWrite.write('orig = pdb.gimp_image_get_layer_by_name(img,\'blank\')\n')
-    fileToWrite.write('map = pdb.gimp_layer_copy(orig,FALSE)\n')
-    fileToWrite.write('pdb.gimp_image_insert_layer(img,map,None,0)\n')
-    fileToWrite.write('pdb.gimp_item_set_name(map,\'' + year + '\')\n')
+    fileToWrite.write('map = pdb.gimp_layer_copy(orig,FALSE)\n')                # create new layer
+    fileToWrite.write('pdb.gimp_image_insert_layer(img,map,None,0)\n')          # actually insert new layer into doc
+    fileToWrite.write('pdb.gimp_item_set_name(map,\'' + year + '\')\n')         # name new layer e.g. '1986'
     #print('map = pdb.gimp_image_get_layer_by_name(img, \'' + userInput + '\')')
-    fileToWrite.write('pdb.gimp_context_set_paint_mode(30)\n')        # mode 30 is Multiply
-    fileToWrite.write('pdb.gimp_context_set_sample_threshold_int(111)\n') # set threshold to 111--experimentally seems to work well
     fileToWrite.write('pdb.gimp_context_set_foreground((191,0,0))\n')         #sets the color to red+4
     for state in red4:
         fileToWrite.write(printingDictio[state])
@@ -270,6 +248,12 @@ def writeCodeForOneYear(year,dataDictionary):
     for state in grayNED:
         fileToWrite.write(printingDictio[state])
 
+    fileToWrite.write('pdb.gimp_context_set_foreground((0,0,0))\n')         #sets the color to black
+    fileToWrite.write('textlayer = pdb.gimp_text_fontname(img, None, 785, 18, \''+nameToMap+'\\n'+year+'\', 0, TRUE, 30, 1, \'Times New Roman\')\n')
+    # fileToWrite.write('textlayer = pdb.gimp_text_layer_new(img, \''+nameToMap+year+'\', \'Times New Roman\', 48, 0)\n')
+    # fileToWrite.write('pdb.gimp_image_insert_layer(img,textlayer,None,0)\n')          # actually insert new layer into doc
+    fileToWrite.write('pdb.gimp_image_merge_down(img,textlayer,0)\n')          # merge the text layer with its map layer
+
 
 ############### END FUNCTION: writeCodeForOneYear DEFINITION ####################
 ############################################################
@@ -286,8 +270,15 @@ plainOrRollingAverageSelection = input('Would you like to generate 1) independen
 fileToWrite = open("gimpCode/Diachronic/gimpCodeExperimental"+nameToMap+userMF+".txt", "w")
 oneNameDictio = {}
 
+# The following lines of code for GIMP Python-fu only need to be written once--at the beginning of the file:
+fileToWrite.write('img = gimp.image_list()[0]\n')
+fileToWrite.write('orig = pdb.gimp_image_get_layer_by_name(img,\'blank\')\n')
+fileToWrite.write('pdb.gimp_context_set_paint_mode(30)\n')        # mode 30 is Multiply
+fileToWrite.write('pdb.gimp_context_set_sample_threshold_int(111)\n') # set threshold to 111--experimentally seems to work well
+fileToWrite.write('pdb.gimp_context_set_opacity(100)\n')    # set opacity to 100
+
 #yearRange = range(1931,2020)
-startingYear = 1990
+startingYear = 1968
 yearAfterEndingYear = 2018      # reset to 2018
 yearRange = range(startingYear,yearAfterEndingYear)        # the range generated will end with the year BEFORE the second number specified
 for year in yearRange:
@@ -299,7 +290,7 @@ for year in yearRange:
         fiveYearDictio = {}
         runningAverageDictio = {}
 
-        print(year + " processed.")
+        # print(year + " processed.")
 
         if plainOrRollingAverageSelection == "1":
             writeCodeForOneYear(year,resStDevPercDictio[nameToMap])
@@ -309,39 +300,38 @@ for year in yearRange:
             # print("For the 5 five year rolling average, we'll need:")
             for currentYearOf5Year in range(int(year),int(year)-5,-1):
                 if currentYearOf5Year >= startingYear:
-                    # print("Let's access the year",currentYearOf5Year,"in the oneNameDictio dictionary:")
-                    #print(oneNameDictio[str(currentYearOf5Year)])
                     fiveYearDictio[str(currentYearOf5Year)] = oneNameDictio[str(currentYearOf5Year)]
-            # print(fiveYearDictio)
             for state in all50States:
                 stateRSPSum = 0
                 stateAppearances = 0
-                for year in fiveYearDictio.keys():
+                for yearOfFive in fiveYearDictio.keys():
                     #print(year,state,fiveYearDictio[year].get(state,100))
                     # stateRSPSum = stateRSPSum + fiveYearDictio[year].get(state,0)
                     # if fiveYearDictio[year].get(state,0)
-                    if state in fiveYearDictio[year].keys():
+                    if state in fiveYearDictio[yearOfFive].keys():
                         # print(fiveYearDictio[year][state])
-                        stateRSPSum = stateRSPSum + fiveYearDictio[year][state]
+                        stateRSPSum = stateRSPSum + fiveYearDictio[yearOfFive][state]
                         stateAppearances = stateAppearances + 1
-                    # else:
-                    #     print(state,"isn't found in",year)
                 if stateAppearances > 0:
-                    # print(state,stateRSPSum/stateAppearances)
+                    # print(state,stateRSPSum/stateAppearances)     # this is the 5-year mean itself
                     runningAverageDictio[state] = stateRSPSum/stateAppearances
             # print(runningAverageDictio)     # now we've made a dictionary like this: {'AK':-0.4,'AL':-0.5,'AR':-0.7...}
-            # input()
             writeCodeForOneYear(year,runningAverageDictio)
 
 
     except:
         print("Something went wrong with the year " + year)
 #print(oneNameDictio)
-input()
 
 
-
-
+# end of gimpCode, only needs to be written once--at the end the file:
+    # delete the original blank layer
+fileToWrite.write('img.remove_layer(orig)\n')
+    # this converts the image to an indexed color scheme, necessary for gifs
+fileToWrite.write('pdb.gimp_image_convert_indexed(img, 0, 0, 15, FALSE, TRUE, "ignored")\n')    # let's give it 15 colors--11 is the minimum
+    # this actually exports to a gif; there seem to be some problems with the 'save2' command
+fileToWrite.write('pdb.file_gif_save(img, None, \'C:\\Users\\Eric\\progs/names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', \'C:\\Users\\Eric\\Progs/names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', 0, 1, 350, 2)\n')
+# fileToWrite.write('pdb.file_gif_save2(img, None, \'C:\\Users\\Eric\\Progs\\names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', \'C:\\Users\\Eric\\Progs\\names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', 0, 1, 200, 2, 1, 1, 1)\n')
 
 
 try:
