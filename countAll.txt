@@ -18,8 +18,8 @@ year1950 = {"F1950": F1950, "M1950": M1950}
 
 ............
 
-F1964 = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':xxx,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
-M1964 = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':xxx,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
+F1964 = {'AL':37464,'AK':3484,'AZ':17826,'AR':20396,'CA':183908,'CO':19846,'CT':27788,'DE':5602,'FL':55642,'GA':48868,'HI':8472,'ID':7090,'IL':108610,'IN':51896,'IA':26612,'KS':20972,'KY':32942,'LA':42230,'ME':10284,'MD':38398,'MA':51166,'MI':85816,'MN':37378,'MS':27620,'MO':43350,'MT':7428,'NE':14906,'NV':4962,'NH':6740,'NJ':64354,'NM':13066,'NY':171896,'NC':51858,'ND':7210,'OH':102218,'OK':23044,'OR':16344,'PA':106800,'RI':8670,'SC':27778,'SD':7712,'TN':39184,'TX':114286,'UT':11708,'VT':4196,'VA':47522,'WA':27996,'WV':17332,'WI':43458,'WY':3586}
+M1964 = {'AL':38852,'AK':3790,'AZ':18478,'AR':20958,'CA':191064,'CO':20782,'CT':29076,'DE':5842,'FL':58342,'GA':51782,'HI':8896,'ID':6990,'IL':113638,'IN':54126,'IA':28830,'KS':22386,'KY':35016,'LA':43912,'ME':10980,'MD':40116,'MA':53468,'MI':89690,'MN':39486,'MS':29034,'MO':45256,'MT':7672,'NE':15826,'NV':5076,'NH':7042,'NJ':67718,'NM':13772,'NY':179706,'NC':54216,'ND':7260,'OH':107542,'OK':24578,'OR':17214,'PA':111942,'RI':9358,'SC':29096,'SD':7908,'TN':41102,'TX':119814,'UT':12216,'VT':4482,'VA':49384,'WA':29136,'WV':18326,'WI':45356,'WY':3650}
 year1964 = {"F1964": F1964, "M1964": M1964}
 
 
