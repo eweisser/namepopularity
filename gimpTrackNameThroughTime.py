@@ -267,6 +267,10 @@ nameToMap = input('Choose a name: ')
 userMF = input('Choose male or female (M/F): ')
 print()
 plainOrRollingAverageSelection = input('Would you like to generate 1) independent maps for each year, or 2) maps using a 5-year rolling mean? ')
+frameTime = input('How many milliseconds do you want each frame of the GIF to last? The default is 500. ')
+if frameTime == "":
+    frameTime = 500
+
 fileToWrite = open("gimpCode/Diachronic/gimpCodeExperimental"+nameToMap+userMF+".txt", "w")
 oneNameDictio = {}
 
@@ -330,7 +334,7 @@ fileToWrite.write('img.remove_layer(orig)\n')
     # this converts the image to an indexed color scheme, necessary for gifs
 fileToWrite.write('pdb.gimp_image_convert_indexed(img, 0, 0, 15, FALSE, TRUE, "ignored")\n')    # let's give it 15 colors--11 is the minimum
     # this actually exports to a gif; there seem to be some problems with the 'save2' command
-fileToWrite.write('pdb.file_gif_save(img, None, \'C:\\Users\\Eric\\progs/names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', \'C:\\Users\\Eric\\Progs/names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', 0, 1, 350, 2)\n')
+fileToWrite.write('pdb.file_gif_save(img, None, \'C:\\Users\\Eric\\progs/names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', \'C:\\Users\\Eric\\Progs/names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', 0, 1, '+frameTime+', 2)\n')
 # fileToWrite.write('pdb.file_gif_save2(img, None, \'C:\\Users\\Eric\\Progs\\names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', \'C:\\Users\\Eric\\Progs\\names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', 0, 1, 200, 2, 1, 1, 1)\n')
 
 
