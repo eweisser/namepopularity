@@ -5,20 +5,62 @@ import statistics
 import ast
 
 # ! Notes for gimpUniversal:
-# I'm trying something bold--writing a universal file for all years (as well as all functions I want for analysis). Soon, I'll write here exactly which functions I want it to be able to handle. Right now, it can:
-# ...given a state, print out a list (in console) of the % of standard deviation for each of the boys' names that show up in that state in 2000. The list is sorted, highest values first.
-# ...given a boys' name, add GIMP code to a specific .txt output file that will create a US state-level popularity map for that name in 2000 when pasted into GIMP's Python-fu console. A summary of the relative popularity among states for that name will be printed to the console.
-# ...add GIMP code to a specific .txt output file that will create 100 US state-level popularity maps, one for each of the 100 most popular boys' names in 2000, when pasted into GIMP's Python-fu console.
-# ...create a CSV file with the average difference between each combination of two states together, for one year. For example, it holds a value of .6104 for KY-MO; across the top 100 names for one sex, the average difference of % of standard deviation of popularity between KY and MO is .6104.
+# This program begins by asking the user for a year and a gender. It builds an RSPD from scratch for that year-gender combination, from the countAll file and the individual state files.
+# A quick summary:
+#           operation no.       names       years       .txt output?    .csv output?        what's compared
+#           1                   many        1           no              no                  names
+#           2                   1 (spec)    1           yes             no                  states
+#           3                   100         1           yes             no                  states*
+#           4                   0           1           no              yes                 state-state pairs
+#           5
+#           6
+
+# 1. Given a state, print out a list (in console) of the % of standard deviation for each of the boys' names that show up in that state in 2000. The list is sorted, highest values first. For example:
+        # state HI percentages of standard deviation [for 2017]
+        # Duke 4.6377...
+        # Kai 4.4206...
+        # Samson 4.4136...
+        # ...
+        # Samuel -3.1579
+
+# 2. Given a name, create a .txt output file containing GIMP code that will create a US state-level popularity map for that name in the specified year when pasted into GIMP's Python-fu console. A summary of the relative popularity among states for that name will be printed to the console. For example:
+        # 1.75+ SDs from mean: ['CA', 'NM']
+        # 1.25 to 1.75 SDs from mean: ['DE']
+        # ...
+        # -1.75- SDs from mean: ['ID']
+        # States with no data: ['RI','VT','WY']
+
+    # The GIMP code will look like:
+        # img = gimp.image_list()[0]
+        # orig = pdb.gimp_image_get_layer_by_name(img,'blank')
+        # map = pdb.gimp_layer_copy(orig,FALSE)
+        # pdb.gimp_image_insert_layer(img,map,None,0)
+        # pdb.gimp_item_set_name(map,'David')
+
+    # issues:
+        # not updated with latest GIMP map features
+        # crashes if the name isn't common enough
+        # output file not ready until program closes
+
+# 3. create a .txt output file containing GIMP code that will create 100 US state-level popularity maps for each of the 100 most popular names (of the specified gender) in the specified year when pasted into GIMP's Python-fu console. A summary of the relative popularity among states for that name will be printed to the console.
+    # The GIMP code will look like:
+        # img = gimp.image_list()[0]
+        # orig = pdb.gimp_image_get_layer_by_name(img,'blank')
+        # map = pdb.gimp_layer_copy(orig,FALSE)
+        # pdb.gimp_image_insert_layer(img,map,None,0)
+        # pdb.gimp_item_set_name(map,'David')
+
+    # issues:
+        # not updated with latest GIMP map features
+
+
+# 4. create a CSV file with the average difference between each combination of two states together, for one year. For example, it holds a value of .6104 for KY-MO; across the top 100 names for one sex, the average difference of % of standard deviation of popularity between KY and MO is .6104.
+
 # let's do GIMP code for making maps comparing states to a central user-specified state
 # let's measure names with popularity patterns like other names
 
 
 
-
-
-
-# If the dictionary 'allBirthsDictio' starts with a value of 32330 for Alabama, you still have the values from 2000/males. If this is supposed to be a different file, some or all values will need to be changed.
 
 # Also don't forget to change:
     # "F" / "M" flag in row[1] == "M" (appears twice)
@@ -78,6 +120,7 @@ userMF = input('Choose male or female (M/F): ')
 
 
 def processDataUpToRSPD(year,sex):          # RSPD stands for residual standard deviation percent dictionary
+                                            # Maybe it should be RPSD or DRPS. Oh well.
 
     print("Analyzing raw numbers for " + sex + " in " + year + "...\n")
 
@@ -179,13 +222,14 @@ resStDevPercDictio = processDataUpToRSPD(userYear,userMF)
 
 
 
-#Excellent. That's the main task. Now we can sort them a little.
+# Excellent. That's the main task. Now we can sort them a little.
 
 while True:
 
-    print('Choose an operation.\nTo see an individual state\'s report on names in a given year, enter a command like "state PA".\n \
+    print('Choose an operation.\n \
+    To see an individual state\'s report on names in a given year, enter a command like "state PA".\n \
     To output code that can be used in GIMP to make a map representing relative popularity for a specific name, just type the name itself.\n \
-    To output maps like that for all of the top 100 names in the active year, type "top100".\n \
+    To output code for maps like that for all of the top 100 names in the active year, type "top100".\n \
     To compare states as a whole (within a single year), enter "compare states".\n \
     To make code for a map showing states\' similarity to a specified state, enter "compare states to [PA]".\n \
     To see what names are similar to a specific name, enter "compare names to [Jessica]".')
@@ -336,7 +380,7 @@ while True:
 
     elif userInput.startswith('top100'):        # makes GIMP code for 100 maps, one for each of the top 100 names that year:
         #print(nameList)
-        fileToWrite = open("gimpCode/gimpCode"+userYear+userMF+".txt", "w")
+        fileToWrite = open("gimpCode/gimpCode"+userYear+"top100"+userMF+".txt", "w")
 
         # Loop through each of the top 100 names.
         for top100Name in sortedLimitedNames:
@@ -371,7 +415,7 @@ while True:
                     blue3.append(state)
                 elif resStDevPercDictio[top100Name][state] < -1.75:
                     blue4.append(state)
-            for state in allBirthsDictio.keys():
+            for state in all50States:
                 if state not in resStDevPercDictio[top100Name].keys():
                     grayNED.append(state)
 
@@ -487,7 +531,7 @@ while True:
         grayNED.clear()
 
         # Create a file with a filename in the format: gimpCode/gimpCodeExperimental1986M.txt
-        fileToWrite = open("gimpCode/gimpCodeExperimental"+userYear+userMF+".txt", "w")
+        fileToWrite = open("gimpCode/gimpCode"+userYear+userInput+userMF+".txt", "w")
 
         # Now loop through all the states that are found as keys in the dictionary of RSPD[name the user input]. For names that are popular enough, that's all states; the less popular a name is, the fewer states are actually found as keys.
         # The value for each state/key found is then sorted into one of nine color groupings. The higher the value, the more popular the name, the darker red the color it will be represented by. The lower the value, the less popular the name, the darker blue.
@@ -513,8 +557,7 @@ while True:
         # print(allBirthsDictio)
         # input()
         # Loop through all states. If a state is not found among the keys for this name for this year, add it to the gray color group.
-        for state in allBirthsDictio.keys():
-            # print(allBirthsDictio)
+        for state in all50States:
             if state not in resStDevPercDictio[userInput].keys():
                 grayNED.append(state)
 
