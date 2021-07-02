@@ -2,6 +2,8 @@ Fxxxx = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx
 Mxxxx = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':xxx,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
 yearXxxx = {"Fxxxx": Fxxxx, "Mxxxx": Mxxxx}
 
+Missing '67, '62, '59, '58, '57, '56, '55, '54, '53, '52, '51...
+
 Fxxxx = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':xxx,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
 Mxxxx = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':xxx,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
 yearXxxx = {"Fxxxx": Fxxxx, "Mxxxx": Mxxxx}
@@ -15,6 +17,12 @@ year1940 = {"F1940": F1940, "M1940": M1940}
 F1950 = {'AL':40516,'AK':1800,'AZ':10168,'AR':22313,'CA':118974,'CO':16306,'CT':19829,'DE':3742,'FL':31498,'GA':44907,'HI':6921,'ID':7902,'IL':92426,'IN':45506,'IA':30382,'KS':21165,'KY':36402,'LA':37502,'ME':10310,'MD':26384,'MA':46536,'MI':78439,'MN':36508,'MS':31679,'MO':42007,'MT':7604,'NE':15345,'NV':1752,'NH':5613,'NJ':47455,'NM':10855,'NY':146714,'NC':52014,'ND':8386,'OH':90248,'OK':24358,'OR':17527,'PA':107876,'RI':7869,'SC':28140,'SD':8618,'TN':39574,'TX':99366,'UT':10304,'VT':4390,'VA':39864,'WA':27135,'WV':24585,'WI':40134,'WY':3751}
 M1950 = {'AL':42100,'AK':1925,'AZ':10655,'AR':23279,'CA':125897,'CO':17579,'CT':20791,'DE':3901,'FL':33146,'GA':46505,'HI':7133,'ID':8133,'IL':97487,'IN':47973,'IA':32278,'KS':22763,'KY':38624,'LA':38860,'ME':10751,'MD':27821,'MA':49678,'MI':82516,'MN':38809,'MS':33225,'MO':43917,'MT':8007,'NE':16454,'NV':1915,'NH':5904,'NJ':50347,'NM':11237,'NY':154329,'NC':54472,'ND':8644,'OH':95602,'OK':25762,'OR':18552,'PA':113759,'RI':8341,'SC':29310,'SD':9188,'TN':41802,'TX':104475,'UT':10888,'VT':4613,'VA':42157,'WA':28682,'WV':25922,'WI':42540,'WY':3855}
 year1950 = {"F1950": F1950, "M1950": M1950}
+
+............
+
+F1958 = {'AL':40592,'AK':xxx,'AZ':16288,'AR':19942,'CA':170862,'CO':20276,'CT':27404,'DE':5628,'FL':52548,'GA':48800,'HI':xxx,'ID':8002,'IL':114756,'IN':54776,'IA':30064,'KS':24960,'KY':36172,'LA':43858,'ME':11238,'MD':37254,'MA':56066,'MI':98892,'MN':41450,'MS':29416,'MO':46896,'MT':8440,'NE':15888,'NV':3292,'NH':6266,'NJ':63888,'NM':13908,'NY':176514,'NC':54520,'ND':7960,'OH':114490,'OK':24668,'OR':17688,'PA':121984,'RI':8904,'SC':29984,'SD':8532,'TN':40362,'TX':119846,'UT':12582,'VT':4542,'VA':47368,'WA':31962,'WV':21372,'WI':46540,'WY':3924}
+M1958 = {'AL':41836,'AK':xxx,'AZ':16712,'AR':20950,'CA':178736,'CO':21566,'CT':28970,'DE':5946,'FL':55448,'GA':51128,'HI':xxx,'ID':8760,'IL':120224,'IN':57676,'IA':32308,'KS':26806,'KY':38086,'LA':46436,'ME':11896,'MD':38706,'MA':58954,'MI':104008,'MN':43542,'MS':29826,'MO':49970,'MT':8830,'NE':17084,'NV':3500,'NH':6932,'NJ':66308,'NM':14742,'NY':184148,'NC':56178,'ND':8568,'OH':119860,'OK':25618,'OR':18590,'PA':128224,'RI':9446,'SC':30718,'SD':8784,'TN':42408,'TX':126652,'UT':12926,'VT':4874,'VA':49296,'WA':33702,'WV':22840,'WI':49662,'WY':4210}
+year1958 = {"F1958": F1958, "M1958": M1958}
 
 ............
 
