@@ -2,7 +2,8 @@ Fxxxx = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx
 Mxxxx = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':xxx,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
 yearXxxx = {"Fxxxx": Fxxxx, "Mxxxx": Mxxxx}
 
-Missing '67, '62, *59, *58, '57, '56, '55, '54, '53, '52, '51...
+Missing '67, '62, *59, *58, *57, '56, '55, '54, '53, '52, '51...
+'57: check Arkansas and Colorado; Florida and Georgia
 
 Fxxxx = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':xxx,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
 Mxxxx = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':xxx,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
@@ -19,6 +20,10 @@ M1950 = {'AL':42100,'AK':1925,'AZ':10655,'AR':23279,'CA':125897,'CO':17579,'CT':
 year1950 = {"F1950": F1950, "M1950": M1950}
 
 ............
+
+F1957 = {'AL':41196,'AK':xxx,'AZ':15604,'AR':20390,'CA':171016,'CO':20390,'CT':27730,'DE':5770,'FL':50762,'GA':49762,'HI':xxx,'ID':8304,'IL':116388,'IN':56570,'IA':30682,'KS':25826,'KY':36508,'LA':43892,'ME':11222,'MD':36644,'MA':56136,'MI':101958,'MN':42060,'MS':29954,'MO':47708,'MT':8868,'NE':16102,'NV':3326,'NH':6506,'NJ':63860,'NM':13752,'NY':174652,'NC':55430,'ND':8110,'OH':118774,'OK':25270,'OR':18200,'PA':123784,'RI':9186,'SC':30960,'SD':8614,'TN':40842,'TX':122216,'UT':12504,'VT':4630,'VA':47600,'WA':32350,'WV':21278,'WI':47484,'WY':3942}
+M1957 = {'AL':42856,'AK':xxx,'AZ':16382,'AR':21342,'CA':179888,'CO':20952,'CT':29346,'DE':5886,'FL':53336,'GA':52292,'HI':xxx,'ID':8460,'IL':122346,'IN':59322,'IA':32952,'KS':27322,'KY':38244,'LA':46934,'ME':11754,'MD':38438,'MA':59248,'MI':106850,'MN':43890,'MS':30922,'MO':49500,'MT':9324,'NE':17040,'NV':3384,'NH':6664,'NJ':66500,'NM':14182,'NY':184588,'NC':58010,'ND':8218,'OH':124804,'OK':25992,'OR':19588,'PA':131420,'RI':9804,'SC':32418,'SD':9102,'TN':43234,'TX':128574,'UT':13466,'VT':4870,'VA':49686,'WA':33768,'WV':22922,'WI':49334,'WY':4278}
+year1957 = {"F1957": F1957, "M1957": M1957}
 
 F1958 = {'AL':40592,'AK':xxx,'AZ':16288,'AR':19942,'CA':170862,'CO':20276,'CT':27404,'DE':5628,'FL':52548,'GA':48800,'HI':xxx,'ID':8002,'IL':114756,'IN':54776,'IA':30064,'KS':24960,'KY':36172,'LA':43858,'ME':11238,'MD':37254,'MA':56066,'MI':98892,'MN':41450,'MS':29416,'MO':46896,'MT':8440,'NE':15888,'NV':3292,'NH':6266,'NJ':63888,'NM':13908,'NY':176514,'NC':54520,'ND':7960,'OH':114490,'OK':24668,'OR':17688,'PA':121984,'RI':8904,'SC':29984,'SD':8532,'TN':40362,'TX':119846,'UT':12582,'VT':4542,'VA':47368,'WA':31962,'WV':21372,'WI':46540,'WY':3924}
 M1958 = {'AL':41836,'AK':xxx,'AZ':16712,'AR':20950,'CA':178736,'CO':21566,'CT':28970,'DE':5946,'FL':55448,'GA':51128,'HI':xxx,'ID':8760,'IL':120224,'IN':57676,'IA':32308,'KS':26806,'KY':38086,'LA':46436,'ME':11896,'MD':38706,'MA':58954,'MI':104008,'MN':43542,'MS':29826,'MO':49970,'MT':8830,'NE':17084,'NV':3500,'NH':6932,'NJ':66308,'NM':14742,'NY':184148,'NC':56178,'ND':8568,'OH':119860,'OK':25618,'OR':18590,'PA':128224,'RI':9446,'SC':30718,'SD':8784,'TN':42408,'TX':126652,'UT':12926,'VT':4874,'VA':49296,'WA':33702,'WV':22840,'WI':49662,'WY':4210}
