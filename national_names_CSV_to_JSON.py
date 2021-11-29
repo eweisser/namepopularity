@@ -19,23 +19,17 @@ while currentYear < 2021:
         recordM["sex"] = "M"
         recordF["year"] = currentYear
         recordF["sex"] = "F"
+        recordM["fnames"] = ""
+        recordF["fnames"] = ""
         rankNumberM = 1
         rankNumberF = 1
         for row in csv_reader:
             if row[1] == "M" and rankNumberM <= 100:
-                if rankNumberM < 10:
-                    keyString = "n0" + str(rankNumberM)
-                else:
-                    keyString = "n" + str(rankNumberM)
-                recordM[keyString] = row[0]
+                recordM["fnames"] = recordM["fnames"] + row[0] + "&"
                 # print(rankNumber, keyString, row[0])
                 rankNumberM = rankNumberM + 1
             if row[1] == "F" and rankNumberF <= 100:
-                if rankNumberF < 10:
-                    keyString = "n0" + str(rankNumberF)
-                else:
-                    keyString = "n" + str(rankNumberF)
-                recordF[keyString] = row[0]
+                recordF["fnames"] = recordF["fnames"] + row[0] + "&"
                 rankNumberF = rankNumberF + 1
         # print(recordM)
         # print(recordF)
@@ -47,6 +41,6 @@ while currentYear < 2021:
 jsonDict["records"] = top_names_json
 print(jsonDict)
 
-# f = open("top_names_json.json", "x")
-# f.write(json.dumps(jsonDict))
-# f.close()
+f = open("top_names_json.json", "x")
+f.write(json.dumps(jsonDict))
+f.close()
