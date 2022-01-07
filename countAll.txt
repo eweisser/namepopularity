@@ -2,9 +2,14 @@ Fxxxx = {'AL':xxx,'AK':###,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx
 Mxxxx = {'AL':xxx,'AK':###,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':###,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
 yearXxxx = {"Fxxxx": Fxxxx, "Mxxxx": Mxxxx}
 
-Missing '67, '49*, '41, '39, '38, '37, '36, '35, '34, '33, '32, '31
+Fxxxx = {'AL':xxx,'AK':###,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':###,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
+Mxxxx = {'AL':xxx,'AK':###,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':###,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
+yearXxxx = {"Fxxxx": Fxxxx, "Mxxxx": Mxxxx}
+
+Missing '67, '49*, '39, '38, '37, '36, '35, '34, '33, '32
 ^ Resolve Alaska and Hawaii ('54, '53, '52, '51)
-Missing just Alaska: '44, '43, '42, '40
+Missing just Alaska: '44, '43, '42, '41, '40
+Missing Alaska, South Dakota, Texas: '31
 '57: The numbers for Arkansas/Colorado and Florida/Georgia are a little sketchy-looking, but they agree on the newish CSV and the VSUS report. If there's a way to triple check, I might want to.
 CSV figure for male births in NC in 1959 contains obvious typo (5662). 1959 PDF reports total (M+F) of 110884 live births by residence in NC in 1959; subtracting presumably accurate figure from CSV for female births in NC in 1959 (54222) suggests accurate figure for males to be 56662.
 
@@ -12,11 +17,23 @@ Fxxxx = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx
 Mxxxx = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':xxx,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
 yearXxxx = {"Fxxxx": Fxxxx, "Mxxxx": Mxxxx}
 
+F1931 = {'AL':30849,'AK':###,'AZ':4465,'AR':20048,'CA':39500,'CO':8933,'CT':12289,'DE':2038,'FL':13167,'GA':30012,'HI':5060,'ID':4524,'IL':57504,'IN':27237,'IA':20312,'KS':16150,'KY':27721,'LA':21290,'ME':7913,'MD':14049,'MA':33774,'MI':44321,'MN':22910,'MS':22031,'MO':29443,'MT':4621,'NE':12759,'NV':617,'NH':3759,'NJ':31362,'NM':6009,'NY':100241,'NC':36294,'ND':7056,'OH':52426,'OK':20931,'OR':6444,'PA':86955,'RI':5472,'SC':19347,'SD':###,'TN':25629,'TX':###,'UT':5834,'VT':3271,'VA':25824,'WA':10650,'WV':19164,'WI':26438,'WY':2198}
+M1931 = {'AL':31894,'AK':###,'AZ':4904,'AR':20994,'CA':41926,'CO':9580,'CT':13266,'DE':2199,'FL':13866,'GA':31768,'HI':5403,'ID':4551,'IL':61284,'IN':28736,'IA':21631,'KS':16644,'KY':29399,'LA':22079,'ME':8390,'MD':14733,'MA':35447,'MI':46608,'MN':23972,'MS':23180,'MO':31291,'MT':5017,'NE':13850,'NV':606,'NH':4005,'NJ':32692,'NM':6313,'NY':105436,'NC':38505,'ND':7324,'OH':55724,'OK':22338,'OR':6766,'PA':91759,'RI':5853,'SC':20168,'SD':###,'TN':26605,'TX':###,'UT':6184,'VT':3405,'VA':26907,'WA':11378,'WV':20161,'WI':27982,'WY':2306}
+year1931 = {"F1931": F1931, "M1931": M1931}
+
+* 1931 NV has more F births than M births
+
+...........
+
 F1940 = {'AL':30726,'AK':###,'AZ':5673,'AR':18504,'CA':54529,'CO':10110,'CT':12475,'DE':2164,'FL':16245,'GA':31640,'HI':4557,'ID':5661,'IL':60460,'IN':29863,'IA':21783,'KS':14188,'KY':31078,'LA':25142,'ME':7393,'MD':15681,'MA':31807,'MI':48008,'MN':25736,'MS':25895,'MO':29763,'MT':5611,'NE':10923,'NV':1059,'NH':4116,'NJ':28996,'NM':7128,'NY':95153,'NC':39112,'ND':6419,'OH':56952,'OK':21813,'OR':8533,'PA':80703,'RI':5331,'SC':21780,'SD':5868,'TN':26916,'TX':62016,'UT':6410,'VT':3391,'VA':27895,'WA':13632,'WV':20454,'WI':26802,'WY':2508}
 M1940 = {'AL':32212,'AK':###,'AZ':5830,'AR':19969,'CA':57758,'CO':10924,'CT':13073,'DE':2387,'FL':17554,'GA':33117,'HI':4857,'ID':6128,'IL':64155,'IN':31797,'IA':23071,'KS':14697,'KY':32690,'LA':25706,'ME':7829,'MD':16684,'MA':33744,'MI':51013,'MN':27179,'MS':26837,'MO':31716,'MT':5945,'NE':11106,'NV':1050,'NH':4213,'NJ':30818,'NM':7664,'NY':100935,'NC':41343,'ND':6716,'OH':58611,'OK':23074,'OR':9090,'PA':84753,'RI':5499,'SC':22832,'SD':6186,'TN':28326,'TX':65056,'UT':6937,'VT':3551,'VA':29119,'WA':14527,'WV':21835,'WI':28089,'WY':2681}
 year1940 = {"F1940": F1940, "M1940": M1940}
 
-...........
+F1941 = {'AL':31420,'AK':###,'AZ':5567,'AR':19690,'CA':61117,'CO':10401,'CT':14165,'DE':2558,'FL':18298,'GA':33075,'HI':4865,'ID':5742,'IL':66218,'IN':31964,'IA':22442,'KS':14898,'KY':30628,'LA':26728,'ME':7741,'MD':18261,'MA':33707,'MI':52141,'MN':26343,'MS':26826,'MO':31792,'MT':5699,'NE':10604,'NV':1063,'NH':4222,'NJ':32626,'NM':7160,'NY':102253,'NC':41368,'ND':6455,'OH':61273,'OK':22110,'OR':9231,'PA':84789,'RI':5706,'SC':23199,'SD':5895,'TN':29263,'TX':66443,'UT':6476,'VT':3328,'VA':30022,'WA':14837,'WV':21337,'WI':27737,'WY':2572}
+M1941 = {'AL':32959,'AK':###,'AZ':5858,'AR':20859,'CA':64073,'CO':10992,'CT':14871,'DE':2529,'FL':19244,'GA':34795,'HI':5251,'ID':5916,'IL':69941,'IN':33630,'IA':23673,'KS':15519,'KY':32874,'LA':27890,'ME':8247,'MD':18804,'MA':35839,'MI':55317,'MN':28016,'MS':27887,'MO':33426,'MT':5846,'NE':11359,'NV':1137,'NH':4360,'NJ':34571,'NM':7578,'NY':108050,'NC':43227,'ND':6804,'OH':64677,'OK':23708,'OR':9637,'PA':89404,'RI':5905,'SC':24184,'SD':6264,'TN':30592,'TX':70339,'UT':7062,'VT':3637,'VA':31057,'WA':15743,'WV':22646,'WI':29449,'WY':2750}
+year1941 = {"F1941": F1941, "M1941": M1941}
+
+* 1941 DE reported more F births than M births.
 
 F1942 = {'AL':34748,'AK':###,'AZ':6194,'AR':20532,'CA':75166,'CO':11390,'CT':17962,'DE':2745,'FL':19750,'GA':35318,'HI':5044,'ID':5550,'IL':75950,'IN':35577,'IA':23374,'KS':16404,'KY':31346,'LA':28449,'ME':8538,'MD':21598,'MA':40104,'MI':60526,'MN':28670,'MS':27527,'MO':34519,'MT':5694,'NE':11513,'NV':1344,'NH':4421,'NJ':39627,'NM':6946,'NY':119195,'NC':43828,'ND':6506,'OH':70266,'OK':22544,'OR':10875,'PA':95917,'RI':6908,'SC':23694,'SD':6067,'TN':31573,'TX':70185,'UT':7557,'VT':3414,'VA':33040,'WA':18910,'WV':21336,'WI':31324,'WY':2669}
 M1942 = {'AL':36388,'AK':###,'AZ':6470,'AR':22148,'CA':79401,'CO':12176,'CT':19302,'DE':2912,'FL':21151,'GA':37173,'HI':5378,'ID':5904,'IL':80282,'IN':38129,'IA':25080,'KS':17516,'KY':34921,'LA':29644,'ME':9181,'MD':22639,'MA':42669,'MI':63360,'MN':30100,'MS':29140,'MO':36192,'MT':6041,'NE':12163,'NV':1438,'NH':4752,'NJ':42082,'NM':7183,'NY':125607,'NC':46026,'ND':6851,'OH':74061,'OK':23464,'OR':11643,'PA':101260,'RI':7274,'SC':25141,'SD':6357,'TN':33574,'TX':74557,'UT':8265,'VT':3761,'VA':34910,'WA':20097,'WV':22586,'WI':32658,'WY':2898}
@@ -140,7 +157,9 @@ F1966 = {'AL':32400,'AK':3188,'AZ':15970,'AR':16764,'CA':166040,'CO':17100,'CT':
 M1966 = {'AL':34098,'AK':3362,'AZ':16586,'AR':17762,'CA':172144,'CO':17844,'CT':26764,'DE':5260,'FL':52786,'GA':45656,'HI':7720,'ID':6676,'IL':103268,'IN':48688,'IA':25014,'KS':18608,'KY':29936,'LA':39426,'ME':9322,'MD':36738,'MA':49828,'MI':84918,'MN':34176,'MS':24522,'MO':39710,'MT':6438,'NE':13134,'NV':4480,'NH':6592,'NJ':61910,'NM':11306,'NY':163998,'NC':47532,'ND':6276,'OH':98362,'OK':20584,'OR':16872,'PA':100346,'RI':8436,'SC':25780,'SD':6476,'TN':35258,'TX':106862,'UT':11720,'VT':4102,'VA':43638,'WA':26642,'WV':15574,'WI':41298,'WY':3046}
 year1966 = {"F1966": F1966, "M1966": M1966}
 
-............
+F1967 = {'AL':xxx,'AK':###,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':###,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':26770,'WV':xxx,'WI':xxx,'WY':xxx}
+M1967 = {'AL':xxx,'AK':###,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':###,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':28105,'WV':xxx,'WI':xxx,'WY':xxx}
+year1967 = {"F1967": F1967, "M1967": M1967}
 
 F1968 = {'AL':15411,'AK':1575,'AZ':8019,'AR':8014,'CA':82648,'CO':9080,'CT':11942,'DE':2388,'DC':3658,'FL':24699,'GA':21497,'HI':3484,'ID':3168,'IL':47209,'IN':22217,'IA':11277,'KS':8757,'KY':13686,'LA':18040,'ME':4088,'MD':16677,'MA':22255,'MI':39077,'MN':15697,'MS':11063,'MO':17950,'MT':2937,'NE':6002,'NV':2095,'NH':3025,'NJ':27787,'NM':5044,'NY':73837,'NC':22560,'ND':2568,'OH':45268,'OK':10020,'OR':7842,'PA':45484,'RI':3661,'SC':12023,'SD':2801,'TN':16374,'TX':51813,'UT':5699,'VT':1857,'VA':19877,'WA':13899,'WV':7092,'WI':18091,'WY':1385}
 M1968 = {'AL':16387,'AK':1640,'AZ':8339,'AR':8550,'CA':87232,'CO':9394,'CT':12586,'DE':2535,'DC':3806,'FL':26296,'GA':22232,'HI':3782,'ID':3392,'IL':49551,'IN':23642,'IA':12091,'KS':9039,'KY':14543,'LA':19049,'ME':4391,'MD':17375,'MA':23737,'MI':40994,'MN':16661,'MS':11811,'MO':19283,'MT':3057,'NE':6128,'NV':2241,'NH':3190,'NJ':29412,'NM':5129,'NY':77370,'NC':23781,'ND':2726,'OH':47639,'OK':10483,'OR':8263,'PA':47692,'RI':3975,'SC':12544,'SD':2913,'TN':17273,'TX':54168,'UT':5904,'VT':1969,'VA':21074,'WA':14701,'WV':7553,'WI':19139,'WY':1500}
