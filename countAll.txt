@@ -6,9 +6,9 @@ Fxxxx = {'AL':xxx,'AK':###,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx
 Mxxxx = {'AL':xxx,'AK':###,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':###,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
 yearXxxx = {"Fxxxx": Fxxxx, "Mxxxx": Mxxxx}
 
-Missing '67, '39, '38, '37, '36, '35, '34, '33, '32
+Missing '67, '38, '37, '36, '35, '34, '33, '32
 ^ Resolve Alaska and Hawaii ('54, '53, '52, '51)
-Missing just Alaska: '44, '43, '42, '41, '40
+Missing just Alaska: '44, '43, '42, '41, '40, '39
 Missing Alaska, South Dakota, Texas: '31
 '57: The numbers for Arkansas/Colorado and Florida/Georgia are a little sketchy-looking, but they agree on the newish CSV and the VSUS report. If there's a way to triple check, I might want to.
 CSV figure for male births in NC in 1959 contains obvious typo (5662). 1959 PDF reports total (M+F) of 110884 live births by residence in NC in 1959; subtracting presumably accurate figure from CSV for female births in NC in 1959 (54222) suggests accurate figure for males to be 56662.
@@ -24,6 +24,10 @@ year1931 = {"F1931": F1931, "M1931": M1931}
 * 1931 NV has more F births than M births
 
 ...........
+
+F1939 = {'AL':30031,'AK':###,'AZ':5360,'AR':17298,'CA':50435,'CO':9982,'CT':11493,'DE':2080,'FL':15545,'GA':31456,'HI':4569,'ID':5388,'IL':58085,'IN':28338,'IA':21094,'KS':14310,'KY':29600,'LA':24009,'ME':7398,'MD':14665,'MA':30835,'MI':45718,'MN':24261,'MS':25292,'MO':28263,'MT':5417,'NE':10737,'NV':936,'NH':3771,'NJ':27980,'NM':6962,'NY':90818,'NC':38531,'ND':6272,'OH':53310,'OK':21251,'OR':8046,'PA':78454,'RI':5028,'SC':21015,'SD':5942,'TN':25770,'TX':58808,'UT':6202,'VT':3171,'VA':26594,'WA':12876,'WV':20179,'WI':26359,'WY':2420}
+M1939 = {'AL':31647,'AK':###,'AZ':5696,'AR':18345,'CA':53170,'CO':10636,'CT':12262,'DE':2234,'FL':16808,'GA':32987,'HI':4823,'ID':5711,'IL':60767,'IN':29845,'IA':22251,'KS':14978,'KY':31149,'LA':24846,'ME':7675,'MD':15462,'MA':32346,'MI':48584,'MN':25860,'MS':26371,'MO':30017,'MT':5580,'NE':11434,'NV':1063,'NH':4002,'NJ':29368,'NM':7265,'NY':96172,'NC':40602,'ND':6619,'OH':55762,'OK':22311,'OR':8495,'PA':82324,'RI':5386,'SC':21973,'SD':6098,'TN':27239,'TX':62354,'UT':6564,'VT':3414,'VA':27664,'WA':13704,'WV':21570,'WI':27835,'WY':2607}
+year1939 = {"F1939": F1939, "M1939": M1939}
 
 F1940 = {'AL':30726,'AK':###,'AZ':5673,'AR':18504,'CA':54529,'CO':10110,'CT':12475,'DE':2164,'FL':16245,'GA':31640,'HI':4557,'ID':5661,'IL':60460,'IN':29863,'IA':21783,'KS':14188,'KY':31078,'LA':25142,'ME':7393,'MD':15681,'MA':31807,'MI':48008,'MN':25736,'MS':25895,'MO':29763,'MT':5611,'NE':10923,'NV':1059,'NH':4116,'NJ':28996,'NM':7128,'NY':95153,'NC':39112,'ND':6419,'OH':56952,'OK':21813,'OR':8533,'PA':80703,'RI':5331,'SC':21780,'SD':5868,'TN':26916,'TX':62016,'UT':6410,'VT':3391,'VA':27895,'WA':13632,'WV':20454,'WI':26802,'WY':2508}
 M1940 = {'AL':32212,'AK':###,'AZ':5830,'AR':19969,'CA':57758,'CO':10924,'CT':13073,'DE':2387,'FL':17554,'GA':33117,'HI':4857,'ID':6128,'IL':64155,'IN':31797,'IA':23071,'KS':14697,'KY':32690,'LA':25706,'ME':7829,'MD':16684,'MA':33744,'MI':51013,'MN':27179,'MS':26837,'MO':31716,'MT':5945,'NE':11106,'NV':1050,'NH':4213,'NJ':30818,'NM':7664,'NY':100935,'NC':41343,'ND':6716,'OH':58611,'OK':23074,'OR':9090,'PA':84753,'RI':5499,'SC':22832,'SD':6186,'TN':28326,'TX':65056,'UT':6937,'VT':3551,'VA':29119,'WA':14527,'WV':21835,'WI':28089,'WY':2681}
