@@ -2,19 +2,12 @@ Fxxxx = {'AL':xxx,'AK':###,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx
 Mxxxx = {'AL':xxx,'AK':###,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':###,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
 yearXxxx = {"Fxxxx": Fxxxx, "Mxxxx": Mxxxx}
 
-Fxxxx = {'AL':xxx,'AK':###,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':###,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
-Mxxxx = {'AL':xxx,'AK':###,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':###,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
-yearXxxx = {"Fxxxx": Fxxxx, "Mxxxx": Mxxxx}
-
-Missing '67, '32
-Missing just Alaska: '44, '43, '42, '41, '40, '39, '38, '37, '36, '35, '34, '33
+Missing: '67
+Missing just Alaska: '44 to '33
+Missing Alaska, Texas: '32
 Missing Alaska, South Dakota, Texas: '31
 '57: The numbers for Arkansas/Colorado and Florida/Georgia are a little sketchy-looking, but they agree on the newish CSV and the VSUS report. If there's a way to triple check, I might want to.
 CSV figure for male births in NC in 1959 contains obvious typo (5662). 1959 PDF reports total (M+F) of 110884 live births by residence in NC in 1959; subtracting presumably accurate figure from CSV for female births in NC in 1959 (54222) suggests accurate figure for males to be 56662.
-
-Fxxxx = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':xxx,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
-Mxxxx = {'AL':xxx,'AK':xxx,'AZ':xxx,'AR':xxx,'CA':xxx,'CO':xxx,'CT':xxx,'DE':xxx,'FL':xxx,'GA':xxx,'HI':xxx,'ID':xxx,'IL':xxx,'IN':xxx,'IA':xxx,'KS':xxx,'KY':xxx,'LA':xxx,'ME':xxx,'MD':xxx,'MA':xxx,'MI':xxx,'MN':xxx,'MS':xxx,'MO':xxx,'MT':xxx,'NE':xxx,'NV':xxx,'NH':xxx,'NJ':xxx,'NM':xxx,'NY':xxx,'NC':xxx,'ND':xxx,'OH':xxx,'OK':xxx,'OR':xxx,'PA':xxx,'RI':xxx,'SC':xxx,'SD':xxx,'TN':xxx,'TX':xxx,'UT':xxx,'VT':xxx,'VA':xxx,'WA':xxx,'WV':xxx,'WI':xxx,'WY':xxx}
-yearXxxx = {"Fxxxx": Fxxxx, "Mxxxx": Mxxxx}
 
 F1931 = {'AL':30849,'AK':###,'AZ':4465,'AR':20048,'CA':39500,'CO':8933,'CT':12289,'DE':2038,'FL':13167,'GA':30012,'HI':5060,'ID':4524,'IL':57504,'IN':27237,'IA':20312,'KS':16150,'KY':27721,'LA':21290,'ME':7913,'MD':14049,'MA':33774,'MI':44321,'MN':22910,'MS':22031,'MO':29443,'MT':4621,'NE':12759,'NV':617,'NH':3759,'NJ':31362,'NM':6009,'NY':100241,'NC':36294,'ND':7056,'OH':52426,'OK':20931,'OR':6444,'PA':86955,'RI':5472,'SC':19347,'SD':###,'TN':25629,'TX':###,'UT':5834,'VT':3271,'VA':25824,'WA':10650,'WV':19164,'WI':26438,'WY':2198}
 M1931 = {'AL':31894,'AK':###,'AZ':4904,'AR':20994,'CA':41926,'CO':9580,'CT':13266,'DE':2199,'FL':13866,'GA':31768,'HI':5403,'ID':4551,'IL':61284,'IN':28736,'IA':21631,'KS':16644,'KY':29399,'LA':22079,'ME':8390,'MD':14733,'MA':35447,'MI':46608,'MN':23972,'MS':23180,'MO':31291,'MT':5017,'NE':13850,'NV':606,'NH':4005,'NJ':32692,'NM':6313,'NY':105436,'NC':38505,'ND':7324,'OH':55724,'OK':22338,'OR':6766,'PA':91759,'RI':5853,'SC':20168,'SD':###,'TN':26605,'TX':###,'UT':6184,'VT':3405,'VA':26907,'WA':11378,'WV':20161,'WI':27982,'WY':2306}
@@ -22,7 +15,11 @@ year1931 = {"F1931": F1931, "M1931": M1931}
 
 * 1931 NV has more F births than M births
 
-...........
+F1932 = {'AL':30780,'AK':###,'AZ':4113,'AR':18240,'CA':38103,'CO':8563,'CT':11634,'DE':2092,'FL':13240,'GA':31000,'HI':5119,'ID':4218,'IL':54380,'IN':25926,'IA':19753,'KS':15285,'KY':28764,'LA':21095,'ME':7863,'MD':14170,'MA':33445,'MI':41558,'MN':22590,'MS':22703,'MO':29140,'MT':4445,'NE':12145,'NV':642,'NH':3803,'NJ':30005,'NM':6063,'NY':96330,'NC':38126,'ND':6714,'OH':49550,'OK':19801,'OR':6312,'PA':82110,'RI':5390,'SC':20149,'SD':6485,'TN':25520,'TX':###,'UT':5817,'VT':2928,'VA':26923,'WA':10418,'WV':18855,'WI':25979,'WY':2080}
+M1932 = {'AL':32159,'AK':###,'AZ':4410,'AR':19210,'CA':39990,'CO':9050,'CT':12097,'DE':2202,'FL':14162,'GA':32717,'HI':5374,'ID':4514,'IL':57132,'IN':27147,'IA':20706,'KS':16415,'KY':30741,'LA':22203,'ME':8266,'MD':14650,'MA':35089,'MI':44178,'MN':23787,'MS':23570,'MO':30809,'MT':4646,'NE':13014,'NV':618,'NH':4005,'NJ':31214,'NM':6328,'NY':102101,'NC':39776,'ND':7333,'OH':52203,'OK':21238,'OR':6535,'PA':86424,'RI':5781,'SC':21369,'SD':6756,'TN':26971,'TX':###,'UT':6157,'VT':3102,'VA':27659,'WA':10961,'WV':19948,'WI':27128,'WY':2169}
+year1932 = {"F1932": F1932, "M1932": M1932}
+
+* 1932 NV has more F births than M births
 
 F1933 = {'AL':28898,'AK':###,'AZ':3952,'AR':17404,'CA':36533,'CO':8467,'CT':10945,'DE':1901,'FL':12557,'GA':29896,'HI':4768,'ID':4170,'IL':52301,'IN':24539,'IA':19132,'KS':14954,'KY':26882,'LA':19458,'ME':7303,'MD':13528,'MA':30962,'MI':39292,'MN':21518,'MS':21613,'MO':27757,'MT':4359,'NE':11800,'NV':656,'NH':3587,'NJ':27225,'NM':5979,'NY':90925,'NC':36561,'ND':6429,'OH':46536,'OK':21156,'OR':5914,'PA':76231,'RI':5048,'SC':19843,'SD':6278,'TN':24403,'TX':52549,'UT':5746,'VT':2968,'VA':25105,'WA':10294,'WV':17638,'WI':24420,'WY':1987}
 M1933 = {'AL':30440,'AK':###,'AZ':4173,'AR':18396,'CA':38503,'CO':8713,'CT':11492,'DE':2021,'FL':13109,'GA':31088,'HI':4865,'ID':4387,'IL':55609,'IN':25941,'IA':20443,'KS':15801,'KY':28443,'LA':20290,'ME':7820,'MD':13912,'MA':32483,'MI':41631,'MN':22996,'MS':22661,'MO':29520,'MT':4594,'NE':12385,'NV':697,'NH':3798,'NJ':28836,'NM':6325,'NY':96233,'NC':38861,'ND':6760,'OH':49247,'OK':22541,'OR':6309,'PA':80815,'RI':5304,'SC':20476,'SD':6581,'TN':25745,'TX':55401,'UT':6164,'VT':3163,'VA':26149,'WA':10588,'WV':18625,'WI':25989,'WY':2220}
