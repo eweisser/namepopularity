@@ -1,0 +1,41 @@
+Missing: '67
+Missing just Alaska: '44 to '33
+Missing Alaska, Texas: '32
+Missing Alaska, South Dakota, Texas: '31
+'57: The numbers for Arkansas/Colorado and Florida/Georgia are a little sketchy-looking, but they agree on the newish CSV and the VSUS report. If there's a way to triple check, I might want to.
+CSV figure for male births in NC in 1959 contains obvious typo (5662). 1959 PDF reports total (M+F) of 110884 live births by residence in NC in 1959; subtracting presumably accurate figure from CSV for female births in NC in 1959 (54222) suggests accurate figure for males to be 56662.
+
+* 1931 NV has more F births than M births
+
+* 1932 NV has more F births than M births
+
+* 1941 DE reported more F births than M births.
+
+* 1944 Hawaii figures are by occurrence instead of residence, as the other states are. No Alaska data at all found in the usual file.
+
+* 1945 Alaska and Hawaii figures are by occurrence instead of residence, as the other states are.
+* 1945 Alaska had more F births than M.
+
+* 1946 Alaska and Hawaii figures are by occurrence instead of residence, as the other states are.
+
+* 1947 Alaska and Hawaii figures are by occurrence instead of residence, as the other states are.
+
+* 1948 Massachusetts was adjusted manually by me to account for 2381 births not in the total. I estimated the split to be 1223 M, 1158 F based on the count of 50006 M, 47383 F before the correction.
+* 1948 Alaska and Hawaii figures are by occurrence instead of residence, as the other states are.
+
+
+* figures from the published PDF are slightly different; perhaps because they are based on a 50% sample?
+* 1952 Virginia, Washington, West Virginia, Wisconsin, and Wyoming were missing from the spreadsheet, so the figures here come from the published PDF.
+* 1952 Alaska and Hawaii figures are by occurrence instead of residence, as the other states are.
+
+* 1953 Alaska and Hawaii figures are by occurrence instead of residence, as the other states are.
+* 1953 Hawaii is based on a 50% sample.
+
+* 1954 Alaska and Hawaii figures are by occurrence instead of residence, as the other states are.
+* 1954 Hawaii is based on a 50% sample.
+
+* 1956 Alaska and Hawaii figures are by occurrence instead of residence, as the other states are.
+* 1956 Hawaii is based on a 50% sample.
+
+* 1957 Alaska and Hawaii figures are by occurrence instead of residence, as the other states are.
+* 1957 Hawaii is based on a 50% sample.
