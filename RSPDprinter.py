@@ -5,19 +5,24 @@ import statistics
 import ast
 
 # ! Notes for RSPDprinter:
+    # This file reads raw counts for names (in 50 separate files, one for each state) and a CSV file containing birth totals (a total for all F 1931 births in AL, all M 1931 births in AL, etc) and outputs a .txt file holding all the RSPD values for individual name-year-sex combinations.
+
+    # A number of parameters are hard-coded: M or F, starting year, ending year, plain vs. rolling average.
+    # The program loops through each year in a range from the starting to the ending year; for each year, it runs the "processDataUpToRSPD" function.
+    # It writes a JSON-like .txt file with a filename like "RSPDsF_1931-2020.txt".
 
 
 
-all50States = ['AK','AL','AR','AZ','CA','CO','CT','DE','FL','GA','HI','IA','ID','IL','IN','KS','KY','LA','MA','MD','ME','MI','MN','MO','MS','MT','NC','ND','NE','NH','NJ','NM','NV','NY','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VA','VT','WA','WI','WV','WY']
-allData = []    # this will hold all the data--except we'll restrict it the relevant year and gender--so we don't have to reread files
-nameList = []   # this will hold all the relevant first names, each only ONCE
+all50States = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
+all_data = []    # this will hold all the data--except we'll restrict it the relevant year and gender--so we don't have to reread files
+name_list = []   # this will hold all the relevant first names, each only ONCE
 sortedNames = []   # this will hold all the relevant first names, each only ONCE, in order of declining frequency
 sortedLimitedNames = []   # this will hold all the top 100 most frequent first names, sorted, each only ONCE
-allBirthsDictio = {}
-smallDictio = {}
-byNameDictio = {}
+allBirthsList = {}
+small_dictio = {}
+by_name_dictio = {}
 residualsDictio = {}
-resStDevPercDictio = {}
+z_score_dictio = {}
 red4 = []
 red3 = []
 red2 = []
@@ -28,8 +33,7 @@ blue3 = []
 blue4 = []
 neutral = []
 grayNED = []
-simpleCount = {}
-printingDictio = {'AL':'pdb.gimp_drawable_edit_bucket_fill(map,0,533,333)\n','AK':'pdb.gimp_drawable_edit_bucket_fill(map,0,90,400)\npdb.gimp_drawable_edit_bucket_fill(map,0,165,430)\npdb.gimp_drawable_edit_bucket_fill(map,0,90,462)\npdb.gimp_drawable_edit_bucket_fill(map,0,38,439)\npdb.gimp_drawable_edit_bucket_fill(map,0,186,453)\npdb.gimp_drawable_edit_bucket_fill(map,0,44,484)\npdb.gimp_drawable_edit_bucket_fill(map,0,31,491)\npdb.gimp_drawable_edit_bucket_fill(map,0,167,440)\npdb.gimp_drawable_edit_bucket_fill(map,0,173,438)\npdb.gimp_drawable_edit_bucket_fill(map,0,27,411)\npdb.gimp_drawable_edit_bucket_fill(map,0,173,446)\npdb.gimp_drawable_edit_bucket_fill(map,0,180,444)\npdb.gimp_drawable_edit_bucket_fill(map,0,184,445)\n','AR':'pdb.gimp_drawable_edit_bucket_fill(map,0,450,300)\n','AZ':'pdb.gimp_drawable_edit_bucket_fill(map,0,160,300)\n','CA':'pdb.gimp_drawable_edit_bucket_fill(map,0,60,240)\n','CO':'pdb.gimp_drawable_edit_bucket_fill(map,0,260,230)\n','CT':'pdb.gimp_drawable_edit_bucket_fill(map,0,700,140)\n','DE':'pdb.gimp_drawable_edit_bucket_fill(map,0,677,200)\n','FL':'pdb.gimp_drawable_edit_bucket_fill(map,0,610,380)\n','GA':'pdb.gimp_drawable_edit_bucket_fill(map,0,585,330)\n','HI':'pdb.gimp_drawable_edit_bucket_fill(map,0,268,456)\npdb.gimp_drawable_edit_bucket_fill(map,0,249,429)\npdb.gimp_drawable_edit_bucket_fill(map,0,212,412)\npdb.gimp_drawable_edit_bucket_fill(map,0,177,398)\npdb.gimp_drawable_edit_bucket_fill(map,0,236,421)\npdb.gimp_drawable_edit_bucket_fill(map,0,236,428)\n','ID':'pdb.gimp_drawable_edit_bucket_fill(map,0,150,120)\n','IL':'pdb.gimp_drawable_edit_bucket_fill(map,0,480,200)\n','IN':'pdb.gimp_drawable_edit_bucket_fill(map,0,530,200)\n','IA':'pdb.gimp_drawable_edit_bucket_fill(map,0,420,170)\n','KS':'pdb.gimp_drawable_edit_bucket_fill(map,0,360,240)\n','KY':'pdb.gimp_drawable_edit_bucket_fill(map,0,550,240)\n','LA':'pdb.gimp_drawable_edit_bucket_fill(map,0,450,380)\n','ME':'pdb.gimp_drawable_edit_bucket_fill(map,0,730,60)\n','MD':'pdb.gimp_drawable_edit_bucket_fill(map,0,653,193)\npdb.gimp_drawable_edit_bucket_fill(map,0,622,195)\npdb.gimp_drawable_edit_bucket_fill(map,0,631,192)\n','MA':'pdb.gimp_drawable_edit_bucket_fill(map,0,708,124)\n','MI':'pdb.gimp_drawable_edit_bucket_fill(map,0,540,150)\npdb.gimp_drawable_edit_bucket_fill(map,0,490,90)\n','MN':'pdb.gimp_drawable_edit_bucket_fill(map,0,410,100)\n','MS':'pdb.gimp_drawable_edit_bucket_fill(map,0,490,340)\n','MO':'pdb.gimp_drawable_edit_bucket_fill(map,0,450,240)\n','MT':'pdb.gimp_drawable_edit_bucket_fill(map,0,230,80)\n','NE':'pdb.gimp_drawable_edit_bucket_fill(map,0,350,190)\n','NV':'pdb.gimp_drawable_edit_bucket_fill(map,0,100,200)\n','NH':'pdb.gimp_drawable_edit_bucket_fill(map,0,705,100)\n','NJ':'pdb.gimp_drawable_edit_bucket_fill(map,0,680,160)\n','NM':'pdb.gimp_drawable_edit_bucket_fill(map,0,250,310)\n','NY':'pdb.gimp_drawable_edit_bucket_fill(map,0,666,127)\npdb.gimp_drawable_edit_bucket_fill(map,0,694,157)\n','NC':'pdb.gimp_drawable_edit_bucket_fill(map,0,640,270)\n','ND':'pdb.gimp_drawable_edit_bucket_fill(map,0,340,80)\n','OH':'pdb.gimp_drawable_edit_bucket_fill(map,0,570,190)\n','OK':'pdb.gimp_drawable_edit_bucket_fill(map,0,380,290)\n','OR':'pdb.gimp_drawable_edit_bucket_fill(map,0,80,100)\n','PA':'pdb.gimp_drawable_edit_bucket_fill(map,0,640,170)\n','RI':'pdb.gimp_drawable_edit_bucket_fill(map,0,714,133)\n','SC':'pdb.gimp_drawable_edit_bucket_fill(map,0,620,300)\n','SD':'pdb.gimp_drawable_edit_bucket_fill(map,0,340,130)\n','TN':'pdb.gimp_drawable_edit_bucket_fill(map,0,530,280)\n','TX':'pdb.gimp_drawable_edit_bucket_fill(map,0,360,360)\n','UT':'pdb.gimp_drawable_edit_bucket_fill(map,0,180,210)\n','VT':'pdb.gimp_drawable_edit_bucket_fill(map,0,690,90)\n','VA':'pdb.gimp_drawable_edit_bucket_fill(map,0,640,230)\npdb.gimp_drawable_edit_bucket_fill(map,0,677,220)\n','WA':'pdb.gimp_drawable_edit_bucket_fill(map,0,100,40)\n','WV':'pdb.gimp_drawable_edit_bucket_fill(map,0,600,220)\n','WI':'pdb.gimp_drawable_edit_bucket_fill(map,0,470,120)\n','WY':'pdb.gimp_drawable_edit_bucket_fill(map,0,240,150)\n'}
+
 similsForOneName = {}       # this is for state similarity measurements
 allSimils = {}              # this is for state similarity measurements
 focalState = "none"         # this is for state similarity measurements
@@ -53,87 +57,107 @@ def processDataUpToRSPD(year,sex):
 
     currentFolder = os.scandir()
 
-    simpleCount.clear()
-    allData.clear()
-    nameList.clear()
-    smallDictio.clear()
-    byNameDictio.clear()
+    all_data.clear()
+    name_list.clear()
+    small_dictio.clear()
+    by_name_dictio.clear()
     global sortedNames
     global sortedLimitedNames
 
 
-    yearBirthTotalsFile = open("countAll.txt", "r")
+    yearBirthTotalsFile = open("count_all_revised.csv", "r")
     for line in yearBirthTotalsFile:
-        #print(line)
-        if line.startswith(sex+year):
+        if line.startswith(year+","+sex):
             #print(line[line.find("{"):])                # get the substring starting with the first {, continuing until the end
-            allBirthsDictio = ast.literal_eval(line[line.find("{"):])
+            allBirthsList = line.split(",")
+            allBirthsList[51] = allBirthsList[51].strip("\n")
+            # print(allBirthsList[51], len(allBirthsList[51]))
+            # input()
+
+    # The exact contents of an allBirthsList are written anew every year-loop, but they always refer to:
+        # index     what
+        # 0         year
+        # 1         sex
+        # 2         AL
+        # 3         AK
+        # 4         AZ
+        # 5         AR
+        # ...
+        # 51        WY
 
     yearBirthTotalsFile.close()
-    #print(allBirthsDictio)
 
     for entry in currentFolder:             # first, we need to make the list of names
         if entry.name.endswith('.TXT'):     # consider only the .txt files
             with open(entry.name) as csv_file:      # let's open that .txt file as a CSV file
                 csv_reader = csv.reader(csv_file, delimiter=",")
                 for row in csv_reader:          # take a row, and--
-                    if row[1] == sex and row[2] == year:
-                        rawNum = row[4]                     # save the actual number of records as 'rawNum'
-                        simpleCount.setdefault(row[3],0)    # put that into the simpleCount dictionary
-                        simpleCount[row[3]] = simpleCount[row[3]] + int(rawNum) # update the simpleCount dictionary
-                    if row[1] == sex and row[2] == year and not row[0] == "DC" and not (year == '1940' and row[0] == 'AK'):
-                        row[4] = int(row[4])/allBirthsDictio[row[0]]   # turn the raw number into the percentage of babies with that name
-                        allData.append(row)
-                        if row[3] not in nameList:          # if the name isn't in the list already...
-                            nameList.append(row[3])             # add it to the end of the list
+                    stateIndex = all50States.index(row[0]) + 2
+                    if row[1] == sex and row[2] == year and not row[0] == "DC" and not allBirthsList[stateIndex] == "###":
+                        row[4] = int(row[4])/int(allBirthsList[stateIndex])
+                        all_data.append(row)
+                        # print(all_data)
+                        if row[3] not in name_list:          # if the name isn't in the list already...
+                            name_list.append(row[3])             # add it to the end of the list
 
-    sortedNames = sorted(simpleCount,key=simpleCount.get,reverse=True)
-    sortedLimitedNames = sortedNames[0:100]
+    # print("Name list:",name_list)
+    # print("all_data:",all_data)
+    # input()
+
 
 
     # We saved all the data, so we don't have to read from files again. We also have a list of all the names that appear in the relevant data. Now, we can make the actual dictionary...
 
-    for firstName in nameList:      # go through all the names in the name list
-        for row in allData:         # keeping in mind one specific first name, go through all the rows in the "allData" list
+    for firstName in name_list:      # go through all the names in the name list
+        for row in all_data:         # keeping in mind one specific first name, go through all the rows in the "all_data" list
             if firstName == row[3]:     # if this given row has info on the current first name, then....
-                smallDictio.setdefault(row[0],row[4])   # inserts a key that's a state (e.g. 'MN') with a value that's the proportion of babies with that name (e.g. .000253478)
-        byNameDictio[firstName] = smallDictio.copy()    # this puts the small dictionary--each states' data on ONE name--into the larger dictionary
-        smallDictio.clear()
+                small_dictio.setdefault(row[0],float(row[4]))   # inserts a key that's a state (e.g. 'MN') with a value that's the proportion of babies with that name (e.g. .000253478)
+        if len(small_dictio) > 16:
+            by_name_dictio[firstName] = small_dictio.copy()    # this puts the small dictionary--each states' data on ONE name--into the larger dictionary
+        small_dictio.clear()
 
-    #The section above builds 'byNameDictio', a dictionary of dictionaries. The top level keys are names, whose values are dictionaries. These dictionaries have keys that are states, whose values are proportions of that name in the whole birth population. For example...
-    #{'Jacob': {'AK': 0.014857, 'AL': 0.0152157...'Demarion': {'GA': 9.192e-05, 'IL': 0.0001588, 'MI': 0.00011025, 'TX': 6.0356e-05},...
+    # The section above builds 'by_name_dictio', a dictionary of dictionaries. The top level keys are names, whose values are dictionaries. These dictionaries have keys that are states, whose values are proportions of that name in the whole birth population. For example...
+    # {'Jacob': {'AK': 0.014857, 'AL': 0.0152157...'Demarion': {'GA': 9.192e-05, 'IL': 0.0001588, 'MI': 0.00011025, 'TX': 6.0356e-05},...
+
+    # Note that states will be missing from by_name_dictio if they had fewer than 5 births with the given name.
+
+    # small_dictio, also used above, looks like:
+        # {'AK': 0.014857, 'AL': 0.0152157...'WY': 0.0092873}
 
 
-    # Note that states will be missing from byNameDictio if they had fewer than 5 births with the given name.
+    for firstName in by_name_dictio.keys():
 
+        # print(by_name_dictio[firstName].values())
+        # input()
 
+        mean = statistics.mean(by_name_dictio[firstName].values())
+        pStDev = statistics.pstdev(by_name_dictio[firstName].values())
 
-    for firstName in byNameDictio.keys():
-        mean = statistics.mean(byNameDictio[firstName].values())
-        pStDev = statistics.pstdev(byNameDictio[firstName].values())
+        # print("Here's a checkpoint.")
+        # input()
 
-        byNameDictio[firstName]['mean'] = mean
-        byNameDictio[firstName]['pStDev'] = pStDev
+        by_name_dictio[firstName]['mean'] = mean
+        by_name_dictio[firstName]['pStDev'] = pStDev
 
-    #Great, we've included the mean and the standard deviation (p-type). Now we need to create a dictionary for residuals.
-    residualsDictio = byNameDictio.copy()   # The .copy() method makes an independent copy--they're not linked
+    # Great, we've included the mean and the standard deviation (p-type). Now we need to create a dictionary for residuals.
+    residualsDictio = by_name_dictio.copy()   # The .copy() method makes an independent copy--they're not linked
     for firstName in residualsDictio.keys():
         for state in residualsDictio[firstName].keys():
-            residualsDictio[firstName][state] = byNameDictio[firstName][state] - byNameDictio[firstName]['mean']
+            residualsDictio[firstName][state] = by_name_dictio[firstName][state] - by_name_dictio[firstName]['mean']
 
-    #And now we have a dictionary full of residuals, fantastic! Now we need a dictionary for "what percentage of a standard deviation each residual is".
+    # And now we have a dictionary full of residuals, fantastic! Now we need a dictionary for "what percentage of a standard deviation each residual is".
 
 
-    resStDevPercDictio = byNameDictio.copy()
+    z_score_dictio = by_name_dictio.copy()
     namesDictionaryString = "'"+year+"'"
     namesDictionaryString = namesDictionaryString + ": {"
-    for firstName in resStDevPercDictio.keys():
+    for firstName in z_score_dictio.keys():
         statesDictionaryString = "'"+firstName+"'"
         statesDictionaryString = statesDictionaryString + ": {"
-        for state in resStDevPercDictio[firstName].keys():
-            if byNameDictio[firstName]['pStDev'] != 0:
+        for state in z_score_dictio[firstName].keys():
+            if by_name_dictio[firstName]['pStDev'] != 0:
                 if state != "mean" and state != "pStDev":
-                    statesDictionaryString = statesDictionaryString + "'"+state+"': "+str(residualsDictio[firstName][state] / byNameDictio[firstName]['pStDev'])+", "
+                    statesDictionaryString = statesDictionaryString + "'"+state+"': "+str(residualsDictio[firstName][state] / by_name_dictio[firstName]['pStDev'])+", "
         statesDictionaryString = statesDictionaryString.rstrip(" ,")
         statesDictionaryString = statesDictionaryString + "}, "
         namesDictionaryString = namesDictionaryString + statesDictionaryString
@@ -152,19 +176,10 @@ def processDataUpToRSPD(year,sex):
 ############################################################
 
 
-
-
-
-nameToMap = input('Choose a name: ')
-userMF = input('Choose male or female (M/F): ')
-print()
+userMF = "M"
+startingYear = 1931             # reset to 1931
+yearAfterEndingYear = 2021
 plainOrRollingAverageSelection = 2
-# frameTime = input('How many milliseconds do you want each frame of the GIF to last? The default is 500. ')
-
-
-#yearRange = range(1931,2020)
-startingYear = 1931
-yearAfterEndingYear = 2021      # reset to 2018
 
 fileToWrite = open("RSPDs" + userMF + "_" + str(startingYear) + "-" + str(yearAfterEndingYear-1) + ".txt", "w")
 oneNameDictio = {}
@@ -179,20 +194,10 @@ for year in yearRange:
 
     except:
         print("Something went wrong with the year " + year)
+        input()
 
 fileToWrite.write(namesDictionaryStringMain)
 fileToWrite.write("}")
-#print(oneNameDictio)
-
-
-# end of gimpCode, only needs to be written once--at the end the file:
-    # delete the original blank layer
-# fileToWrite.write('img.remove_layer(orig)\n')
-#     # this converts the image to an indexed color scheme, necessary for gifs
-# fileToWrite.write('pdb.gimp_image_convert_indexed(img, 0, 0, 15, FALSE, TRUE, "ignored")\n')    # let's give it 15 colors--11 is the minimum
-#     # this actually exports to a gif; there seem to be some problems with the 'save2' command
-# fileToWrite.write('pdb.file_gif_save(img, None, \'C:\\Users\\Eric\\progs/names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', \'C:\\Users\\Eric\\Progs/names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', 0, 1, '+frameTime+', 2)\n')
-# fileToWrite.write('pdb.file_gif_save2(img, None, \'C:\\Users\\Eric\\Progs\\names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', \'C:\\Users\\Eric\\Progs\\names\\gimpCode\\Diachronic\\'+nameToMap+'_diachronic.gif\', 0, 1, 200, 2, 1, 1, 1)\n')
 
 
 try:
